@@ -1,17 +1,15 @@
 {
-    "name": "PiVisen",
-    "short_name": "PiVisen",
-    "description": "Professional AI, Python, Machine Learning and Intelligent Software Solutions.",
-    "start_url": "/",
-    "display": "standalone",
-    "background_color": "#ffffff",
-    "theme_color": "#0a192f",
-    "orientation": "portrait-primary",
-    "icons": [
-        {
-            "src": "assets/images/favicon.png",
-            "sizes": "512x512",
-            "type": "image/png"
-        }
-    ]
+  "name": "PiVisen AI",
+  "short_name": "PiVisen AI",
+  "description": "AI products and software for businesses: computer vision, edge AI, cloud AI and Python.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#05070f",
+  "theme_color": "#05070f",
+  "icons": [
+    { "src": "/assets/images/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/assets/images/favicon.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/assets/images/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
 }
