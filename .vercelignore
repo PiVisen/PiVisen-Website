@@ -1,0 +1,7 @@
+# Files in the repository that should not be published on pivisen.com
+tools/
+blog/_template.html
+AUDIT.md
+CHANGES.md
+README.md
+docs/
