@@ -45,7 +45,7 @@ AUTHORS = {
     "PiVisen AI Team": {
         "type": "Organization",
         "image": "/assets/images/logo-mark.webp",
-        "bio": "PiVisen AI is a technology start-up from Bahawalpur, Pakistan. We build AI products and software for businesses, including computer vision, edge AI and cloud AI systems.",
+        "bio": "PiVisen AI is a technology start-up from Islamabad, Pakistan. We build AI products and software for businesses, including computer vision, edge AI and cloud AI systems.",
         "link": "/about",
         "link_text": "Meet the team",
     },

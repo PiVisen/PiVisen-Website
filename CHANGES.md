@@ -32,7 +32,7 @@ Everything below was removed or reworded. If you can prove a claim (a measuremen
 | "Why **Enterprises Choose** PiVisen AI?", "modern enterprises", "enterprise clients" | Home, Contact, everywhere | Removed. Copy now speaks to businesses, shops, pharmacies, offices and homes. | You have enterprise customers. |
 | "ensuring **our clients** stay ahead" | Projects | Removed. | You have clients who agree to be named. |
 | "Established Enterprise" | About | Removed. Kept "Founded 2026" and "Technology company" from the same block. | — |
-| "HEADQUARTERS: **Islamabad**, Pakistan" | About, home JSON-LD | Changed to **Bahawalpur, Pakistan**, as you instructed. | If Islamabad is also an office, add it as a second location. |
+| "HEADQUARTERS: **Islamabad**, Pakistan" | About, home JSON-LD | Kept as **Islamabad, Pakistan** (footer, contact page, About page and Organization data). The first redesign used Bahawalpur; changed back to Islamabad on request. | — |
 | "dedicated long-term technical engineering support", "Enterprise-grade deployment standards" | Home, About | Removed. | You offer a support contract. |
 | "cutting-edge R&D", "elite" engineering, "state-of-the-art", "next-generation", "pioneering", "leading", "global standard" | Many pages | Removed as unprovable superlatives. | — |
 | "Driven by passion … our leadership and **technical experts**" (implied a larger team) | About | Reworded to "Three engineers who design and build PiVisen AI's products themselves." | You hire more people. |

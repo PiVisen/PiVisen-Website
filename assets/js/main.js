@@ -17,8 +17,29 @@
   function onScroll() {
     if (header) header.classList.toggle("is-scrolled", window.scrollY > 8);
   }
-  window.addEventListener("scroll", onScroll, { passive: true });
+  // Back-to-top button: shows after 300px and fills its ring as you scroll
+  var topBtn = document.querySelector("[data-scroll-top]");
+  var ring = topBtn && topBtn.querySelector(".ring-progress");
+  if (topBtn) {
+    topBtn.addEventListener("click", function () {
+      window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+    });
+  }
+  var ticking = false;
+  function updateTopBtn() {
+    ticking = false;
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    var progress = max > 0 ? Math.min(1, window.scrollY / max) : 0;
+    topBtn.classList.toggle("show", window.scrollY > 300);
+    if (ring) ring.style.strokeDashoffset = String(100 - progress * 100);
+  }
+
+  window.addEventListener("scroll", function () {
+    onScroll();
+    if (topBtn && !ticking) { ticking = true; requestAnimationFrame(updateTopBtn); }
+  }, { passive: true });
   onScroll();
+  if (topBtn) updateTopBtn();
 
   function setMenu(open) {
     document.documentElement.classList.toggle("nav-open", open);
