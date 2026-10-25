@@ -1,555 +1,293 @@
-/* ====================================
-   PiVisen AI
-   Main JavaScript
-==================================== */
-
-
-document.addEventListener("DOMContentLoaded", () => {
-
-
-    /* ====================================
-       Smooth Navigation
-    ==================================== */
-
-    const navLinks = document.querySelectorAll(
-        ".nav-links a"
-    );
-
-
-    navLinks.forEach(link => {
-
-
-        link.addEventListener(
-            "click",
-            function(event){
-
-
-                const targetId =
-                this.getAttribute("href");
-
-
-                const targetSection =
-                document.querySelector(targetId);
-
-
-
-                if(targetSection){
-
-
-                    event.preventDefault();
-
-
-                    targetSection.scrollIntoView({
-
-                        behavior:"smooth"
-
-                    });
-
-
-                }
-
-
-            }
-        );
-
-
-    });
-
-    /* ====================================
-       Dynamic Footer Year
-    ==================================== */
-
-    const footerText =
-    document.querySelector(
-        ".footer p"
-    );
-
-
-
-    if(footerText){
-
-
-        const year =
-        new Date().getFullYear();
-
-
-
-        footerText.textContent =
-        `© ${year} PiVisen. All Rights Reserved.`;
-
-
-    }
-
-// ==========================================
-// MOBILE NAVIGATION
-// ==========================================
-
-const menuToggle = document.querySelector(".menu-toggle");
-const navLinksMenu = document.querySelector(".nav-links");
-
-if (menuToggle && navLinksMenu) {
-
-    menuToggle.addEventListener("click", () => {
-
-        navLinksMenu.classList.toggle("active");
-
-        const expanded =
-            menuToggle.getAttribute("aria-expanded") === "true";
-
-        menuToggle.setAttribute(
-            "aria-expanded",
-            !expanded
-        );
-
-    });
-
-}
-
-// ==========================================
-// SCROLL REVEAL ANIMATION
-// ==========================================
-
-const revealElements = document.querySelectorAll(".reveal");
-
-
-function revealOnScroll(){
-
-
-    revealElements.forEach(element => {
-
-
-        const windowHeight = window.innerHeight;
-
-
-        const elementTop = element.getBoundingClientRect().top;
-
-
-        const revealPoint = 120;
-
-
-
-        if(elementTop < windowHeight - revealPoint){
-
-            element.classList.add("active");
-
-        }
-
-
-    });
-
-
-}
-
-
-
-window.addEventListener(
-    "scroll",
-    revealOnScroll
-);
-
-
-
-revealOnScroll();
-
-
-
-// ==========================================
-// SCROLL TO TOP BUTTON
-// ==========================================
-
-  const scrollTopBtns = document.querySelectorAll('.scroll-top, .scroll-top-btn');
-  if (scrollTopBtns.length === 0) return;
-
-  const svgNS = "http://www.w3.org/2000/svg";
-  const radius = 23;
-  const circumference = 2 * Math.PI * radius;
-
-  // Initialize each button instance
-  scrollTopBtns.forEach(btn => {
-    if (!btn.querySelector('.scroll-progress-ring')) {
-      const svg = document.createElementNS(svgNS, "svg");
-      svg.className.baseVal = "scroll-progress-ring";
-      svg.setAttribute("width", "100");
-      svg.setAttribute("height", "100");
-      svg.setAttribute("viewBox", "0 0 50 50");
-
-      const circle = document.createElementNS(svgNS, "circle");
-      circle.setAttribute("cx", "25");
-      circle.setAttribute("cy", "25");
-      circle.setAttribute("r", radius);
-
-      svg.appendChild(circle);
-      btn.insertBefore(svg, btn.firstChild);
-    }
-
-    const progressCircle = btn.querySelector('.scroll-progress-ring circle');
-    if (progressCircle) {
-      progressCircle.style.strokeDasharray = `${circumference} ${circumference}`;
-      progressCircle.style.strokeDashoffset = circumference;
-    }
-
-    // Click handler for smooth scrolling to top
-    btn.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  });
-
-  // Single global scroll listener for maximum performance across all pages
-  window.addEventListener('scroll', () => {
-    const scrollTop = window.scrollY;
-    const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-    const strokeDashoffsetValue = circumference - (scrollPercent / 100) * circumference;
-
-    scrollTopBtns.forEach(btn => {
-      const progressCircle = btn.querySelector('.scroll-progress-ring circle');
-      if (progressCircle) {
-        progressCircle.style.strokeDashoffset = strokeDashoffsetValue;
-      }
-
-      if (scrollTop > 300) {
-        btn.classList.add('show');
-      } else {
-        btn.classList.remove('show');
+/* =====================================================================
+   PiVisen AI — site script (loaded with `defer` on every page)
+   1. Header & mobile menu   4. Contact form (EmailJS)
+   2. Scroll reveal          5. Blog index: search & categories
+   3. Footer year            6. Blog post: contents, share links
+   ===================================================================== */
+(function () {
+  "use strict";
+
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* 1. HEADER & MOBILE MENU ------------------------------------------- */
+  var header = document.querySelector("[data-header]");
+  var toggle = document.querySelector(".nav-toggle");
+  var nav = document.getElementById("site-nav");
+
+  function onScroll() {
+    if (header) header.classList.toggle("is-scrolled", window.scrollY > 8);
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  function setMenu(open) {
+    document.documentElement.classList.toggle("nav-open", open);
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+  }
+
+  if (toggle && nav) {
+    toggle.addEventListener("click", function () {
+      var open = toggle.getAttribute("aria-expanded") !== "true";
+      setMenu(open);
+      if (open) {
+        var first = nav.querySelector("a");
+        if (first) first.focus();
       }
     });
-  }, { passive: true });
+    nav.addEventListener("click", function (e) {
+      if (e.target.closest("a")) setMenu(false);
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && toggle.getAttribute("aria-expanded") === "true") {
+        setMenu(false);
+        toggle.focus();
+      }
+    });
+    window.addEventListener("resize", function () {
+      if (window.innerWidth > 1080) setMenu(false);
+    });
+  }
 
-// ==========================================
-// EMAILJS CONTACT FORM
-// ==========================================
+  /* 2. SCROLL REVEAL -------------------------------------------------- */
+  var revealEls = document.querySelectorAll(".reveal, .reveal-stagger");
+  if (!reduceMotion && "IntersectionObserver" in window) {
+    var io = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: "0px 0px -8% 0px", threshold: 0.08 }
+    );
+    revealEls.forEach(function (el) { io.observe(el); });
+  } else {
+    revealEls.forEach(function (el) { el.classList.add("is-visible"); });
+  }
 
-(function(){
+  /* 3. FOOTER YEAR ---------------------------------------------------- */
+  var year = document.getElementById("year");
+  if (year) year.textContent = new Date().getFullYear();
 
-    emailjs.init({
-        publicKey: "jKQm7Yy0mXBAAy3sG",
+  /* 4. CONTACT FORM (EmailJS) -----------------------------------------
+     Same EmailJS account as before: service, template and public key are
+     unchanged. We call the EmailJS REST endpoint directly, so no extra
+     script has to load. Both the old home-page and old contact-page field
+     names are sent, so the existing email template keeps working. */
+  var EMAILJS = {
+    serviceId: "service_ll6ox79",
+    templateId: "template_bc0wtu9",
+    publicKey: "jKQm7Yy0mXBAAy3sG",
+    endpoint: "https://api.emailjs.com/api/v1.0/email/send"
+  };
+
+  var form = document.getElementById("contact-form");
+  if (form) {
+    var statusBox = form.querySelector(".form-status");
+    var submitBtn = form.querySelector('button[type="submit"]');
+
+    // Pre-select a topic from links such as /contact?topic=pilens#contact-form
+    var params = new URLSearchParams(window.location.search);
+    var topic = params.get("topic");
+    if (topic && form.topic) {
+      var match = Array.prototype.find.call(form.topic.options, function (o) { return o.dataset.key === topic; });
+      if (match) form.topic.value = match.value;
+    }
+
+    var rules = {
+      name: function (v) { return v.trim().length >= 2 || "Please enter your name."; },
+      email: function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()) || "Please enter a valid email address."; },
+      topic: function (v) { return v !== "" || "Please choose what you need help with."; },
+      message: function (v) { return v.trim().length >= 20 || "Please tell us a little more (at least 20 characters)."; }
+    };
+
+    function validateField(field) {
+      var rule = rules[field.name];
+      if (!rule) return true;
+      var result = rule(field.value);
+      var error = document.getElementById(field.id + "-error");
+      if (result === true) {
+        field.removeAttribute("aria-invalid");
+        return true;
+      }
+      field.setAttribute("aria-invalid", "true");
+      if (error) error.textContent = result;
+      return false;
+    }
+
+    form.addEventListener("blur", function (e) {
+      if (rules[e.target.name] && e.target.value) validateField(e.target);
+    }, true);
+    form.addEventListener("input", function (e) {
+      if (e.target.getAttribute("aria-invalid") === "true") validateField(e.target);
     });
 
-})();
+    function showStatus(type, text) {
+      statusBox.className = "form-status is-" + type;
+      statusBox.textContent = text;
+    }
 
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var firstInvalid = null;
+      Object.keys(rules).forEach(function (name) {
+        var field = form.elements[name];
+        if (field && !validateField(field) && !firstInvalid) firstInvalid = field;
+      });
+      if (firstInvalid) {
+        firstInvalid.focus();
+        showStatus("error", "Please fix the highlighted fields.");
+        return;
+      }
+      if (form.elements.website && form.elements.website.value) return; // spam trap
 
+      var data = {
+        name: form.elements.name.value.trim(),
+        email: form.elements.email.value.trim(),
+        company: form.elements.company ? form.elements.company.value.trim() : "",
+        topic: form.elements.topic.value,
+        message: form.elements.message.value.trim()
+      };
+      var fullMessage = data.message + (data.company ? "\n\nCompany: " + data.company : "");
+      var templateParams = {
+        // field names used by the old home-page form
+        from_name: data.name,
+        from_email: data.email,
+        subject: "Website enquiry: " + data.topic,
+        message: fullMessage,
+        // field names used by the old contact-page form
+        user_name: data.name,
+        user_email: data.email,
+        project_type: data.topic,
+        project_details: fullMessage,
+        // extras
+        reply_to: data.email,
+        company: data.company,
+        page: window.location.href
+      };
 
-const contactForm = document.getElementById("contact-form");
+      submitBtn.disabled = true;
+      submitBtn.dataset.label = submitBtn.dataset.label || submitBtn.textContent;
+      submitBtn.textContent = "Sending…";
+      statusBox.className = "form-status";
 
-
-if(contactForm){
-
-    contactForm.addEventListener("submit", function(event){
-
-        event.preventDefault();
-
-
-        emailjs.sendForm(
-
-            "service_ll6ox79",
-
-            "template_bc0wtu9",
-
-            this
-
-        )
-
-        .then(() => {
-
-
-            alert(
-            "Message sent successfully! PiVisen AI team will contact you soon."
-            );
-
-
-            contactForm.reset();
-
-
+      fetch(EMAILJS.endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          service_id: EMAILJS.serviceId,
+          template_id: EMAILJS.templateId,
+          user_id: EMAILJS.publicKey,
+          template_params: templateParams
         })
-
-
-        .catch((error)=>{
-
-
-            console.error(
-                "EmailJS Error:",
-                error
-            );
-
-
-            alert(
-            "Message sending failed. Please try again."
-            );
-
-
+      })
+        .then(function (res) {
+          if (!res.ok) return res.text().then(function (t) { throw new Error(res.status + " " + t); });
+          form.reset();
+          showStatus("success", "Thank you, " + data.name + ". Your message has been sent. We will reply to " + data.email + ".");
+        })
+        .catch(function (err) {
+          if (window.console) console.warn("Contact form could not be sent:", err);
+          showStatus("error", "Sorry, your message could not be sent. Please email us at info@pivisen.com or call +92 302 0022779.");
+        })
+        .finally(function () {
+          submitBtn.disabled = false;
+          submitBtn.textContent = submitBtn.dataset.label;
         });
-
-
     });
-
-}
-
-// ==========================================
-// HOME PAGE-HERO SECTION TYPEWRITER EFFECT
-// ==========================================
-
-  // Home Page Typewriter Effect
-  const typedTextSpan = document.getElementById("home-typewriter-text");
-  const textArray = [
-    "Computer Vision",
-    "Edge Intelligence",
-    "Cloud Systems",
-    "Intelligence Surveillance",
-  ];
-  const typingDelay = 100;
-  const erasingDelay = 50;
-  const newTextDelay = 2000;
-  let textArrayIndex = 0;
-  let charIndex = 0;
-
-  function typeText() {
-    if (charIndex < textArray[textArrayIndex].length) {
-      typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
-      charIndex++;
-      setTimeout(typeText, typingDelay);
-    } else {
-      setTimeout(eraseText, newTextDelay);
-    }
   }
 
-  function eraseText() {
-    if (charIndex > 0) {
-      typedTextSpan.textContent = textArray[textArrayIndex].substring(
-        0,
-        charIndex - 1,
-      );
-      charIndex--;
-      setTimeout(eraseText, erasingDelay);
-    } else {
-      textArrayIndex++;
-      if (textArrayIndex >= textArray.length) textArrayIndex = 0;
-      setTimeout(typeText, typingDelay + 500);
-    }
-  }
+  /* 5. BLOG INDEX: SEARCH & CATEGORIES -------------------------------- */
+  var blogList = document.querySelector("[data-post-list]");
+  if (blogList) {
+    var cards = Array.prototype.slice.call(document.querySelectorAll("[data-post]"));
+    var chips = Array.prototype.slice.call(document.querySelectorAll("[data-category]"));
+    var search = document.getElementById("blog-search");
+    var countEl = document.querySelector("[data-result-count]");
+    var emptyEl = document.querySelector("[data-empty]");
+    var state = { category: "All", query: "" };
 
-  if (textArray.length) {
-    setTimeout(typeText, newTextDelay + 250);
-  }
+    var qs = new URLSearchParams(window.location.search);
+    if (qs.get("category")) state.category = qs.get("category");
+    if (qs.get("q")) { state.query = qs.get("q"); search.value = state.query; }
 
-// ==========================================
-// ABOUT PAGE-HERO SECTION TYPEWRITER EFFECT
-// ==========================================
-
-  // 2. Reusable Typewriter Utility
-  function setupTypewriter(elementId, textArray, delays, initialDelay) {
-    const span = document.getElementById(elementId);
-    if (!span || !textArray.length) return;
-
-    let arrayIndex = 0;
-    let charIndex = 0;
-
-    function type() {
-      if (charIndex < textArray[arrayIndex].length) {
-        span.textContent += textArray[arrayIndex].charAt(charIndex);
-        charIndex++;
-        setTimeout(type, delays.typing);
-      } else {
-        setTimeout(erase, delays.newText);
-      }
-    }
-
-    function erase() {
-      if (charIndex > 0) {
-        span.textContent = textArray[arrayIndex].substring(0, charIndex - 1);
-        charIndex--;
-        setTimeout(erase, delays.erasing);
-      } else {
-        arrayIndex++;
-        if (arrayIndex >= textArray.length) arrayIndex = 0;
-        setTimeout(type, delays.typing + delays.pauseOffset);
-      }
-    }
-
-    setTimeout(type, initialDelay);
-  }
-
-  // Hero Section Typewriter
-  setupTypewriter(
-    "about-typewriter-text",
-    [
-      "Cloud AI & Edge Vision",
-      "Computer Vision & ML",
-      "Neural AI & DL",
-      "AI Surveillance",
-    ],
-    { typing: 100, erasing: 50, newText: 2000, pauseOffset: 500 },
-    2250
-  );
-
-  // Mission Section Typewriter
-  setupTypewriter(
-    "mission-typewriter-text",
-    [
-      "Real-Time Neural Processing",
-      "Smart Industrial Autonomy",
-      "Advanced Edge Intelligence",
-    ],
-    { typing: 90, erasing: 45, newText: 2200, pauseOffset: 400 },
-    1000
-  );
-
-  // 3. Trust Carousel
-  const track = document.querySelector(".trust-carousel-track");
-  const nextBtn = document.querySelector(".next-btn");
-  const prevBtn = document.querySelector(".prev-btn");
-
-  if (track && nextBtn && prevBtn) {
-    const cards = Array.from(track.children);
-    let currentIndex = 0;
-
-    function updateCarousel(index) {
-      const cardWidth = cards[0].getBoundingClientRect().width;
-      track.scrollTo({
-        left: cardWidth * index,
-        behavior: "smooth",
+    chips.forEach(function (chip) {
+      var cat = chip.dataset.category;
+      var n = cat === "All" ? cards.length : cards.filter(function (c) { return c.dataset.categoryName === cat; }).length;
+      var count = chip.querySelector(".count");
+      if (count) count.textContent = "(" + n + ")";
+      chip.addEventListener("click", function () {
+        state.category = cat;
+        apply(true);
       });
-    }
-
-    nextBtn.addEventListener("click", () => {
-      if (currentIndex < cards.length - 1) {
-        currentIndex++;
-        updateCarousel(currentIndex);
-      }
+    });
+    search.addEventListener("input", function () {
+      state.query = search.value;
+      apply(true);
     });
 
-    prevBtn.addEventListener("click", () => {
-      if (currentIndex > 0) {
-        currentIndex--;
-        updateCarousel(currentIndex);
-      }
-    });
-  }
-
-// ==========================================
-// SERVICES PAGE JAVASCRIPT
-// ==========================================
-
-  /* Hero Typewriter */
-  function runTypewriter(element, text, speed, callback) {
-    let index = 0;
-    function type() {
-      if (index < text.length) {
-        element.textContent += text.charAt(index);
-        index++;
-        setTimeout(type, speed);
-      } else if (callback) {
-        callback();
-      }
-    }
-    type();
-  }
-
-  const headingElement = document.getElementById("typewriter-heading");
-  const headingText = "Advanced Cloud AI, Edge Vision & Intelligence Solutions";
-  if (headingElement) {
-    runTypewriter(headingElement, headingText, 40);
-  }
-
-  document.querySelectorAll(".typewriter-sub").forEach((el, index) => {
-    const text = el.getAttribute("data-text");
-    setTimeout(() => {
-      runTypewriter(el, text, 50);
-    }, index * 600);
-  });
-
-
-  /* Sequential Chain Animation */
-  const chainObserver = new IntersectionObserver(
-    (entries, observerInstance) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const row = entry.target;
-          startChainTypingSequence(row);
-          observerInstance.unobserve(row);
-        }
+    function apply(updateUrl) {
+      var q = state.query.trim().toLowerCase();
+      var shown = 0;
+      cards.forEach(function (card) {
+        var okCat = state.category === "All" || card.dataset.categoryName === state.category;
+        var okText = !q || card.dataset.search.indexOf(q) !== -1;
+        card.hidden = !(okCat && okText);
+        if (!card.hidden) shown++;
       });
-    },
-    { root: null, rootMargin: "0px", threshold: 0.25 }
-  );
-
-  document.querySelectorAll("[data-chain-row]").forEach((row) => {
-    chainObserver.observe(row);
-  });
-
-  function startChainTypingSequence(row) {
-    const iconBox = row.querySelector(".square-icon-box");
-    const headingEl = row.querySelector(".typed-heading");
-    const descEl = row.querySelector(".typed-desc");
-    const listEl = row.querySelector(".typed-list");
-
-    const headingText = headingEl.getAttribute("data-text");
-    const descText = descEl.getAttribute("data-text");
-    const itemsArr = JSON.parse(listEl.getAttribute("data-items"));
-
-    if (iconBox) {
-      iconBox.classList.add("active-badge");
+      chips.forEach(function (chip) {
+        chip.setAttribute("aria-pressed", String(chip.dataset.category === state.category));
+      });
+      countEl.textContent = shown === 1 ? "Showing 1 article" : "Showing " + shown + " articles";
+      emptyEl.hidden = shown !== 0;
+      if (updateUrl && window.history.replaceState) {
+        var url = new URL(window.location.href);
+        if (state.category !== "All") url.searchParams.set("category", state.category); else url.searchParams.delete("category");
+        if (q) url.searchParams.set("q", state.query.trim()); else url.searchParams.delete("q");
+        window.history.replaceState(null, "", url.pathname + url.search + url.hash);
+      }
     }
+    apply(false);
+  }
 
-    setTimeout(() => {
-      runTypewriter(headingEl, headingText, 30, () => {
-        runTypewriter(descEl, descText, 20, () => {
-          typeChainListItems(itemsArr, 0, listEl);
+  /* 6. BLOG POST: CONTENTS & SHARE ------------------------------------ */
+  var toc = document.querySelector("[data-toc]");
+  if (toc && "IntersectionObserver" in window) {
+    var links = Array.prototype.slice.call(toc.querySelectorAll("a"));
+    var byId = {};
+    links.forEach(function (a) { byId[a.getAttribute("href").slice(1)] = a; });
+    var spy = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            links.forEach(function (a) { a.classList.remove("is-active"); a.removeAttribute("aria-current"); });
+            var link = byId[entry.target.id];
+            if (link) { link.classList.add("is-active"); link.setAttribute("aria-current", "true"); }
+          }
         });
-      });
-    }, 300);
-  }
-
-  function typeChainListItems(arr, itemIdx, listElement) {
-    if (itemIdx < arr.length) {
-      const li = document.createElement("li");
-      listElement.appendChild(li);
-      runTypewriter(li, arr[itemIdx], 25, () => {
-        typeChainListItems(arr, itemIdx + 1, listElement);
-      });
-    }
-  }
-
-// ==========================================
-// UNIVERSAL BUTTONS HOVER EFFECTS MANAGER
-// ==========================================
-
-// Helper function for button hover shadows & transforms
-const applyButtonHoverEffect = (selector, mouseOverStyles, mouseOutStyles) => {
-  const buttons = document.querySelectorAll(selector);
-  buttons.forEach(btn => {
-    btn.addEventListener('mouseover', () => {
-      Object.assign(btn.style, mouseOverStyles);
-    });
-    btn.addEventListener('mouseout', () => {
-      Object.assign(btn.style, mouseOutStyles);
-    });
-  });
-};
-
-// 1. General Consultation Buttons
-applyButtonHoverEffect(
-  '.consultation-btn',
-  { boxShadow: '0 8px 20px rgba(0, 210, 132, 0.3)' },
-  { boxShadow: 'none' }
-);
-
-// 2. Expert AI Consultation Buttons
-document.querySelectorAll('a.btn[href="contact.html"]').forEach(btn => {
-  if (btn.textContent.includes('Request Expert AI Consultation')) {
-    btn.addEventListener('mouseover', function() {
-      Object.assign(this.style, {
-        boxShadow: '0 6px 20px rgba(0, 210, 132, 0.4)',
-        transform: 'translateY(-1px)'
-      });
-    });
-    btn.addEventListener('mouseout', function() {
-      Object.assign(this.style, {
-        boxShadow: '0 4px 15px rgba(0, 210, 132, 0.25)',
-        transform: 'translateY(0)'
-      });
+      },
+      { rootMargin: "-20% 0px -70% 0px" }
+    );
+    Object.keys(byId).forEach(function (id) {
+      var h = document.getElementById(id);
+      if (h) spy.observe(h);
     });
   }
-});
 
-
-});
+  var copyBtn = document.querySelector("[data-copy-link]");
+  if (copyBtn) {
+    var copyStatus = document.querySelector("[data-share-status]");
+    copyBtn.addEventListener("click", function () {
+      var url = copyBtn.dataset.url || window.location.href;
+      var done = function () { copyStatus.textContent = "Link copied"; setTimeout(function () { copyStatus.textContent = ""; }, 2500); };
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(url).then(done, function () { window.prompt("Copy this link:", url); });
+      } else {
+        window.prompt("Copy this link:", url);
+      }
+    });
+  }
+})();
