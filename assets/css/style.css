@@ -932,6 +932,39 @@ strong { font-weight: 600; color: var(--text); }
 .prev-next .next { text-align: right; }
 .prev-next .next .label { justify-content: flex-end; }
 
+/* Back-to-top button with scroll progress ring */
+.scroll-top-btn {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 90;
+  display: grid;
+  place-items: center;
+  width: 52px; height: 52px;
+  padding: 0;
+  border: 1px solid var(--border-strong);
+  border-radius: 50%;
+  background: rgba(10, 15, 29, 0.85);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  color: var(--accent);
+  box-shadow: var(--shadow-md);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(16px);
+  transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease), visibility 0s linear var(--dur), background-color var(--dur), color var(--dur), box-shadow var(--dur);
+}
+.scroll-top-btn.show { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+.scroll-top-btn:hover { background: var(--accent); color: var(--accent-ink); transform: translateY(-4px); box-shadow: 0 12px 30px -8px rgba(46, 230, 200, 0.7); }
+.scroll-top-btn .icon { width: 22px; height: 22px; position: relative; }
+.scroll-progress-ring { position: absolute; inset: -1px; width: calc(100% + 2px); height: calc(100% + 2px); transform: rotate(-90deg); pointer-events: none; }
+.scroll-progress-ring circle { fill: none; stroke-width: 2; }
+.scroll-progress-ring .ring-track { stroke: rgba(148, 163, 184, 0.15); }
+.scroll-progress-ring .ring-progress { stroke: var(--accent); stroke-linecap: round; stroke-dasharray: 100; stroke-dashoffset: 100; }
+.scroll-top-btn:hover .ring-progress { stroke: var(--accent-ink); }
+@media (max-width: 640px) { .scroll-top-btn { right: 16px; bottom: 16px; width: 46px; height: 46px; } }
+.nav-open .scroll-top-btn { display: none; }
+
 /* 404 */
 .error-page { text-align: center; padding-block: var(--section-y); }
 .error-code { font-family: var(--font-display); font-size: clamp(5rem, 3rem + 10vw, 9rem); font-weight: 700; line-height: 1; }
@@ -952,7 +985,7 @@ strong { font-weight: 600; color: var(--text); }
 
 @media print {
   .js .reveal, .js .reveal-stagger > * { opacity: 1 !important; transform: none !important; }
-  .site-header, .site-footer, .post-aside, .cta-band { display: none; }
+  .site-header, .site-footer, .post-aside, .cta-band, .scroll-top-btn { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
