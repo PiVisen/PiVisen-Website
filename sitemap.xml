@@ -1,18 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<urlset
-xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
-    <url>
-
-        <loc>https://www.pivisen.com/</loc>
-
-        <lastmod>2026-07-16</lastmod>
-
-        <changefreq>weekly</changefreq>
-
-        <priority>1.0</priority>
-
-    </url>
-
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://pivisen.com/</loc>
+    <lastmod>2026-10-25</lastmod>
+  </url>
+  <url>
+    <loc>https://pivisen.com/services</loc>
+    <lastmod>2026-10-25</lastmod>
+  </url>
+  <url>
+    <loc>https://pivisen.com/projects</loc>
+    <lastmod>2026-10-25</lastmod>
+  </url>
+  <url>
+    <loc>https://pivisen.com/technologies</loc>
+    <lastmod>2026-10-25</lastmod>
+  </url>
+  <url>
+    <loc>https://pivisen.com/about</loc>
+    <lastmod>2026-10-25</lastmod>
+  </url>
+  <url>
+    <loc>https://pivisen.com/blog</loc>
+    <lastmod>2026-10-25</lastmod>
+  </url>
+  <url>
+    <loc>https://pivisen.com/contact</loc>
+    <lastmod>2026-10-25</lastmod>
+  </url>
+  <url>
+    <loc>https://pivisen.com/blog/how-ai-cameras-turn-video-into-alerts</loc>
+    <lastmod>2026-10-25</lastmod>
+  </url>
+  <url>
+    <loc>https://pivisen.com/blog/edge-ai-vs-cloud-ai</loc>
+    <lastmod>2026-10-25</lastmod>
+  </url>
+  <url>
+    <loc>https://pivisen.com/blog/reducing-false-alarms-in-ai-security</loc>
+    <lastmod>2026-10-25</lastmod>
+  </url>
+  <url>
+    <loc>https://pivisen.com/blog/what-is-computer-vision</loc>
+    <lastmod>2026-10-25</lastmod>
+  </url>
+  <url>
+    <loc>https://pivisen.com/blog/building-pilens-from-idea-to-prototype</loc>
+    <lastmod>2026-10-25</lastmod>
+  </url>
 </urlset>

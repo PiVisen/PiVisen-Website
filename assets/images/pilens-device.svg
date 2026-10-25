@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 440" width="520" height="440" role="img" aria-labelledby="t d">
+  <title id="t">PiLENS unit (illustration)</title>
+  <desc id="d">Illustration of the PiLENS AI security camera unit with three stages: detect, check and alert.</desc>
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#2ee6c8" stop-opacity=".28"/>
+      <stop offset=".55" stop-color="#3bb8ff" stop-opacity=".08"/>
+      <stop offset="1" stop-color="#05070f" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#16213a"/>
+      <stop offset="1" stop-color="#0a0f1d"/>
+    </linearGradient>
+    <linearGradient id="edge" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2ee6c8" stop-opacity=".8"/>
+      <stop offset=".5" stop-color="#2ee6c8" stop-opacity=".1"/>
+      <stop offset="1" stop-color="#3bb8ff" stop-opacity=".6"/>
+    </linearGradient>
+    <radialGradient id="lens" cx="40%" cy="35%" r="70%">
+      <stop offset="0" stop-color="#3bb8ff"/>
+      <stop offset=".35" stop-color="#0f5f73"/>
+      <stop offset="1" stop-color="#03070f"/>
+    </radialGradient>
+  </defs>
+  <circle cx="260" cy="215" r="210" fill="url(#glow)"/>
+  <g stroke="#94a3b8" stroke-opacity=".12" fill="none">
+    <circle cx="260" cy="215" r="150"/>
+    <circle cx="260" cy="215" r="195" stroke-dasharray="3 7"/>
+  </g>
+  <!-- dashed connectors -->
+  <g stroke="#2ee6c8" stroke-opacity=".5" stroke-dasharray="4 6" fill="none" stroke-width="1.5">
+    <path d="M118 236 H150"/>
+    <path d="M355 96 C380 96 392 110 392 128"/>
+    <path d="M392 330 C392 352 380 362 362 364"/>
+  </g>
+  <!-- camera module -->
+  <rect x="172" y="62" width="176" height="112" rx="24" fill="url(#body)" stroke="url(#edge)" stroke-width="1.5"/>
+  <circle cx="260" cy="118" r="42" fill="#05070f" stroke="#2ee6c8" stroke-opacity=".6" stroke-width="2"/>
+  <circle cx="260" cy="118" r="30" fill="url(#lens)"/>
+  <circle cx="260" cy="118" r="11" fill="#05070f"/>
+  <circle cx="251" cy="108" r="5" fill="#fff" fill-opacity=".75"/>
+  <circle cx="320" cy="84" r="4" fill="#ff6b6b"/>
+  <!-- main unit -->
+  <rect x="150" y="160" width="220" height="200" rx="30" fill="url(#body)" stroke="url(#edge)" stroke-width="1.5"/>
+  <rect x="166" y="176" width="188" height="168" rx="20" fill="none" stroke="#94a3b8" stroke-opacity=".12"/>
+  <g stroke="#2ee6c8" stroke-opacity=".35" stroke-width="1.5" fill="none">
+    <path d="M190 210 h40 v20 h30"/>
+    <path d="M190 236 h22 v18 h50"/>
+    <rect x="262" y="214" width="56" height="44" rx="6"/>
+    <path d="M272 214 v-8 M284 214 v-8 M296 214 v-8 M308 214 v-8 M272 258 v8 M284 258 v8 M296 258 v8 M308 258 v8"/>
+  </g>
+  <text x="182" y="306" font-family="Space Grotesk, Inter, Segoe UI, Arial, sans-serif" font-size="28" font-weight="600" fill="#eef2fa">Pi<tspan fill="#2ee6c8">LENS</tspan></text>
+  <text x="183" y="330" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="1.5" fill="#a6b1c7">ON-DEVICE AI</text>
+  <circle cx="338" cy="300" r="5" fill="#2ee6c8"/>
+  <circle cx="338" cy="300" r="10" fill="#2ee6c8" fill-opacity=".2"/>
+  <!-- stage chips -->
+  <g font-family="Inter, Segoe UI, Arial, sans-serif" font-size="14" font-weight="600">
+    <rect x="18" y="216" width="100" height="40" rx="20" fill="#0a0f1d" stroke="#2ee6c8" stroke-opacity=".6"/>
+    <text x="40" y="241" fill="#eef2fa"><tspan fill="#2ee6c8">1</tspan>  Detect</text>
+    <rect x="356" y="76" width="100" height="40" rx="20" fill="#0a0f1d" stroke="#fbbf24" stroke-opacity=".7"/>
+    <text x="380" y="101" fill="#eef2fa"><tspan fill="#fbbf24">2</tspan>  Check</text>
+    <rect x="362" y="344" width="100" height="40" rx="20" fill="#0a0f1d" stroke="#ff6b6b" stroke-opacity=".7"/>
+    <text x="388" y="369" fill="#eef2fa"><tspan fill="#ff6b6b">3</tspan>  Alert</text>
+  </g>
+  <text x="260" y="420" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" letter-spacing="1" fill="#8390a8">RASPBERRY PI 5 · NO GPU · VIDEO STAYS ON SITE</text>
+</svg>

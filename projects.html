@@ -1,608 +1,236 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Projects | PiVisen AI & Python Solutions</title>
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="assets/images/favicon.png" />
-
-    <meta
-      name="description"
-      content="Explore PiVisen AI projects including Cloud AI, Edge AI, Computer Vision, and advanced Night Surveillance systems."
-    />
-
-    <meta property="og:title" content="Projects | PiVisen AI Solutions" />
-
-    <meta
-      property="og:description"
-      content="Discover elite AI-powered projects, computer vision systems, and scalable software solutions developed by PiVisen AI."
-    />
-
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PiLENS AI Security Camera | PiVisen AI</title>
+    <meta name="description" content="PiLENS detects theft and violent incidents in real time on a Raspberry Pi 5, double-checks each alert with AI, needs no GPU and keeps video on site." />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href="https://pivisen.com/projects" />
+    <meta name="theme-color" content="#05070f" />
     <meta property="og:type" content="website" />
-
-    <link rel="stylesheet" href="assets/css/style.css" />
-
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    />
+    <meta property="og:site_name" content="PiVisen AI" />
+    <meta property="og:title" content="PiLENS: the AI security camera that checks before it alerts" />
+    <meta property="og:description" content="Real-time theft and violence detection on a Raspberry Pi 5. A second AI check confirms each alert. No GPU, and video stays on site." />
+    <meta property="og:url" content="https://pivisen.com/projects" />
+    <meta property="og:image" content="https://pivisen.com/assets/images/pivisen-og-image.webp" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="PiVisen AI — Edge AI, computer vision, night surveillance and machine learning" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="PiLENS: the AI security camera that checks before it alerts" />
+    <meta name="twitter:description" content="Real-time theft and violence detection on a Raspberry Pi 5. A second AI check confirms each alert. No GPU, and video stays on site." />
+    <meta name="twitter:image" content="https://pivisen.com/assets/images/pivisen-og-image.webp" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/assets/images/favicon-32x32.png" type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="preload" href="/assets/fonts/space-grotesk-var-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/assets/fonts/inter-var-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/assets/images/pilens-device.svg" as="image" type="image/svg+xml" fetchpriority="high" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <script>document.documentElement.classList.add("js");</script>
+    <script src="/assets/js/main.js" defer></script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://pivisen.com/" },
+        { "@type": "ListItem", "position": 2, "name": "PiLENS", "item": "https://pivisen.com/projects" }
+      ]
+    }
+  ]
+}
+    </script>
   </head>
-
-  <body>
-    <!-- HEADER -->
-    <header class="header">
-      <nav class="navbar" aria-label="Primary Navigation">
-        <div class="container nav-container">
-          <!-- Logo -->
-          <div class="logo">
-            <a href="#home" class="logo-link" aria-label="Go to PiVisen Home">
-              <img
-                src="assets/images/logo.png"
-                alt="PiVisen AI & Python Solutions Logo"
-                class="logo-img"
-                width="60"
-                height="60"
-              />
-              <span class="logo-text"> PiVisen AI </span>
-            </a>
-          </div>
-
-          <!-- Navigation Links -->
-          <ul class="nav-links" id="primary-navigation">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="technologies.html">Technology</a></li>
-            <li><a href="contact.html">Contact</a></li>
-          </ul>
-
-          <!-- Mobile Menu Button -->
-          <button
-            class="menu-toggle"
-            type="button"
-            aria-label="Open navigation menu"
-            aria-controls="primary-navigation"
-            aria-expanded="false"
-          >
-            <i class="fas fa-ellipsis-v" aria-hidden="true"></i>
-          </button>
-        </div>
-      </nav>
-    </header>
-
-    <!-- PROJECT HERO SECTION -->
-    <section class="page-hero projects-hero">
-      <div class="container">
-        <div class="page-hero-content">
-          <span class="page-tag"> OUR PROJECTS </span>
-
-          <h1>Building Elite Intelligence & Edge Surveillance</h1>
-
-          <p>
-            At PiVisen AI, we architect enterprise-grade ecosystems across Cloud
-            AI, Edge AI, Computer Vision, and Night Surveillance
-            systems—empowering organizations to achieve absolute real-time
-            security, autonomous intelligence, and scalable machine and deep
-            learning performance.
-          </p>
-
-          <div class="page-hero-buttons">
-            <a href="contact.html" class="btn"> Start Your Project </a>
-
-            <a href="services.html" class="btn secondary-btn">
-              Explore Expertise
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- PROJECT INTRODUCTION -->
-    <section class="section project-intro">
-      <div class="container">
-        <div class="project-intro-wrapper">
-          <div class="project-intro-content">
-            <span class="section-subtitle"> CORE COMPETENCIES </span>
-
-            <h2>Pioneering Advanced Intelligence Ecosystems</h2>
-
-            <p>
-              We bridge the gap between complex data and actionable insights.
-              Our engineering philosophy centers on robust architecture that
-              delivers reliable, real-time performance.
-            </p>
-
-            <p>
-              Every solution is crafted for precision, ensuring scalability and
-              seamless integration into modern enterprise infrastructures.
-            </p>
-          </div>
-
-          <div class="project-highlight-box">
-            <div class="project-highlight">
-              <i class="fas fa-microchip"></i>
-              <div>
-                <h3>Edge AI</h3>
-                <p>Localized intelligence for instantaneous decision making.</p>
-              </div>
-            </div>
-
-            <div class="project-highlight">
-              <i class="fas fa-eye"></i>
-              <div>
-                <h3>Computer Vision</h3>
-                <p>Advanced recognition algorithms for precise monitoring.</p>
-              </div>
-            </div>
-
-            <div class="project-highlight">
-              <i class="fas fa-cloud"></i>
-              <div>
-                <h3>Cloud AI</h3>
-                <p>
-                  Scalable AI power hosted on high-availability infrastructures.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FEATURED PROJECTS SECTION -->
-    <section class="section featured-projects">
-      <div class="container">
-        <span class="section-subtitle"> FLAGSHIP SOLUTIONS </span>
-
-        <h2>Precision-Engineered AI Systems</h2>
-
-        <p class="section-description">
-          A showcase of mission-critical systems powered by cutting-edge neural
-          networks and Python-based automation.
-        </p>
-
-        <div class="projects-showcase-grid">
-          <div class="project-showcase-card">
-            <div class="project-icon">
-              <i class="fas fa-moon"></i>
-            </div>
-
-            <h3>Night Surveillance AI</h3>
-
-            <p>
-              High-sensitivity computer vision optimized for low-light
-              environment security.
-            </p>
-
-            <div class="project-tags">
-              <span>Computer Vision</span>
-              <span>AI</span>
-              <span>Security</span>
-            </div>
-          </div>
-
-          <div class="project-showcase-card">
-            <div class="project-icon">
-              <i class="fas fa-network-wired"></i>
-            </div>
-
-            <h3>Edge Analytics Engine</h3>
-
-            <p>
-              Real-time data processing unit designed for low-latency edge
-              deployment.
-            </p>
-
-            <div class="project-tags">
-              <span>Edge AI</span>
-              <span>Python</span>
-              <span>Hardware</span>
-            </div>
-          </div>
-
-          <div class="project-showcase-card">
-            <div class="project-icon">
-              <i class="fas fa-server"></i>
-            </div>
-
-            <h3>Enterprise Cloud AI</h3>
-
-            <p>
-              Scalable backend architecture supporting massive AI workload
-              distribution.
-            </p>
-
-            <div class="project-tags">
-              <span>Cloud AI</span>
-              <span>Scalability</span>
-              <span>Backend</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CASE STUDIES SECTION -->
-    <section class="section case-study-section">
-      <div class="container">
-        <span class="section-subtitle"> INDUSTRY IMPACT </span>
-
-        <h2>Transforming Vision Into Security</h2>
-
-        <p class="section-description">
-          Strategic technology implementations that provide superior control and
-          intelligent foresight for modern enterprises.
-        </p>
-
-        <div class="case-study-grid">
-          <div class="case-study-card">
-            <div class="case-study-number">01</div>
-
-            <h3>Deep Learning Vision</h3>
-
-            <p>
-              Deployment of advanced neural models for accurate object detection
-              and behavior analysis.
-            </p>
-
-            <div class="case-study-details">
-              <span>Neural Nets</span>
-              <span>Deep Learning</span>
-              <span>Computer Vision</span>
-            </div>
-          </div>
-
-          <div class="case-study-card">
-            <div class="case-study-number">02</div>
-
-            <h3>Automated Security Core</h3>
-
-            <p>
-              Unified security framework utilizing Python automation for rapid
-              response and alert generation.
-            </p>
-
-            <div class="case-study-details">
-              <span>Automation</span>
-              <span>Python</span>
-              <span>System Integration</span>
-            </div>
-          </div>
-
-          <div class="case-study-card">
-            <div class="case-study-number">03</div>
-
-            <h3>Cloud-Edge Synchrony</h3>
-
-            <p>
-              Hybrid architecture ensuring seamless data flow between Edge AI
-              sensors and Cloud analytics.
-            </p>
-
-            <div class="case-study-details">
-              <span>Architecture</span>
-              <span>Hybrid Cloud</span>
-              <span>Data Sync</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- PROJECT CATEGORIES SECTION -->
-    <section class="section project-category-section">
-      <div class="container">
-        <span class="section-subtitle"> TECHNICAL DOMAINS </span>
-
-        <h2>Our Specialized AI Ecosystem</h2>
-
-        <div class="category-grid">
-          <div class="category-card">
-            <i class="fas fa-microchip"></i>
-            <h3>Edge AI</h3>
-            <p>
-              Optimizing AI inference directly on local hardware for efficiency.
-            </p>
-          </div>
-
-          <div class="category-card">
-            <i class="fas fa-cloud"></i>
-            <h3>Cloud AI</h3>
-            <p>
-              Delivering high-performance AI services through cloud
-              orchestration.
-            </p>
-          </div>
-
-          <div class="category-card">
-            <i class="fas fa-eye"></i>
-            <h3>Computer Vision</h3>
-            <p>
-              Advanced imagery analysis for safety, security, and automation.
-            </p>
-          </div>
-
-          <div class="category-card">
-            <i class="fas fa-code"></i>
-            <h3>Python Engineering</h3>
-            <p>
-              Developing high-integrity software for robust enterprise systems.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- DEVELOPMENT PROCESS -->
-    <section class="section development-process-section">
-      <div class="container">
-        <span class="section-subtitle"> ENGINEERING PATHWAY </span>
-
-        <h2>The PiVisen Development Lifecycle</h2>
-
-        <div class="process-timeline">
-          <div class="process-item">
-            <div class="process-icon">
-              <i class="fas fa-fingerprint"></i>
-            </div>
-            <div>
-              <h3>AI Requirement Analysis</h3>
-              <p>
-                Defining architectural needs for custom AI and vision systems.
-              </p>
-            </div>
-          </div>
-
-          <div class="process-item">
-            <div class="process-icon">
-              <i class="fas fa-drafting-compass"></i>
-            </div>
-            <div>
-              <h3>System Blueprinting</h3>
-              <p>
-                Designing secure, scalable frameworks for complex operations.
-              </p>
-            </div>
-          </div>
-
-          <div class="process-item">
-            <div class="process-icon">
-              <i class="fas fa-code-branch"></i>
-            </div>
-            <div>
-              <h3>Core Development</h3>
-              <p>
-                Implementing optimized code for Cloud and Edge environments.
-              </p>
-            </div>
-          </div>
-
-          <div class="process-item">
-            <div class="process-icon">
-              <i class="fas fa-shield-halved"></i>
-            </div>
-            <div>
-              <h3>Validation & Deployment</h3>
-              <p>
-                Ensuring production-grade performance and security reliability.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- PROJECT IMPACT SECTION -->
-    <section class="section project-impact-section">
-      <div class="container">
-        <div class="impact-box">
-          <div class="impact-content">
-            <span class="section-subtitle"> PROJECT IMPACT </span>
-
-            <h2>Superior Intelligence for Future Enterprises</h2>
-
-            <p>
-              We drive digital transformation through specialized AI, ensuring
-              our clients stay ahead with optimized surveillance and intelligent
-              automated systems.
-            </p>
-          </div>
-
-          <div class="impact-stats">
-            <div class="impact-stat">
-              <h3>Edge</h3>
-              <p>Optimized AI</p>
-            </div>
-
-            <div class="impact-stat">
-              <h3>Cloud</h3>
-              <p>Ready Infrastructure</p>
-            </div>
-
-            <div class="impact-stat">
-              <h3>Vision</h3>
-              <p>Intelligence Powered</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ENTERPRISE CALL TO ACTION SECTION -->
-    <section class="cta-section">
-      <div class="container">
-        <div class="cta-box">
-          <div class="cta-grid-container">
-            <div class="cta-features-grid">
-              <div class="cta-feature-card green">
-                <i class="fas fa-microchip cta-feature-icon green"></i>
-                <span class="cta-feature-text">Edge AI Core</span>
-              </div>
-              <div class="cta-feature-card blue">
-                <i class="fas fa-cloud cta-feature-icon blue"></i>
-                <span class="cta-feature-text">Cloud Scale</span>
-              </div>
-              <div class="cta-feature-card green">
-                <i class="fas fa-moon cta-feature-icon green"></i>
-                <span class="cta-feature-text">Night Vision</span>
-              </div>
-              <div class="cta-feature-card blue">
-                <i class="fas fa-brain cta-feature-icon blue"></i>
-                <span class="cta-feature-text">Deep Learning</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Technology Expertise Badges -->
-          <div class="cta-badges">
-            <span>Edge AI</span>
-            <span>Cloud AI</span>
-            <span>Machine Learning</span>
-            <span>Deep Learning</span>
-            <span>Night Surveillance</span>
-          </div>
-
-          <!-- CTA Label -->
-          <p class="cta-small-title">EDGE VISION • UNIFIED INTELLIGENCE</p>
-
-          <!-- Main CTA Heading -->
-          <h2>
-            Transform Your Ideas Into
-            <br />
-            Intelligent Edge & Cloud Solutions
-            <br />
-            With PiVisen AI
-          </h2>
-
-          <!-- CTA Description -->
-          <p class="cta-description">
-            PiVisen AI helps businesses build secure, scalable, and future-ready
-            architectures using Edge AI, Cloud AI, Machine Learning, Deep
-            Learning, and Computer Vision.
-            <br /><br />
-            From low-latency night surveillance systems to enterprise cloud
-            platforms, we design technology that delivers real-world impact.
-          </p>
-
-          <!-- CTA Button -->
-          <div class="cta-buttons">
-            <a href="#contact" class="btn">Initiate Your Project</a>
-          </div>
-
-          <!-- Trust Indicators -->
-          <div class="cta-trust">
-            <span>✔ Edge Optimized</span>
-            <span>✔ Cloud-Scale Architecture</span>
-            <span>✔ Deep Learning Powered</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ENTERPRISE FOOTER SECTION -->
-    <footer class="footer-section">
-      <div class="container">
-        <div class="footer-grid">
-          <!-- Company Info -->
-          <div class="footer-brand">
-            <h3>PiVisen AI</h3>
-            <p>
-              Building intelligent digital solutions powered by Artificial
-              Intelligence, Machine Learning and Modern Technology.
-            </p>
-          </div>
-
-          <!-- Quick Links -->
-          <div class="footer-links">
-            <h4>Quick Links</h4>
-            <a href="index.html"> Home </a>
-            <a href="about.html"> About </a>
-            <a href="services.html"> Services </a>
-            <a href="technologies.html"> Technology </a>
-            <a href="contact.html"> Contact </a>
-          </div>
-
-          <!-- Services / Expertise -->
-          <div class="footer-links">
-            <h4>Our Expertise</h4>
-            <a href="#"> Cloud AI </a>
-            <a href="#"> Edge AI & Vision </a>
-            <a href="#"> Computer Vision </a>
-            <a href="#"> Night Surveillance </a>
-            <a href="#"> ML & DL </a>
-          </div>
-
-          <!-- Contact Info -->
-          <div class="footer-contact">
-            <h4>Contact</h4>
-            <p>Email: info@pivisen.com</p>
-            <p>Edge AI & Computer Vision</p>
-            <div class="footer-social">
-              <a
-                href="https://www.linkedin.com/company/pivisen/posts/?feedView=all"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <i class="fab fa-linkedin-in"></i> LinkedIn
-              </a>
-
-              <a
-                href="https://github.com/PiVisen"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <i class="fab fa-github"></i> GitHub
-              </a>
-
-              <a
-                href="https://x.com/PiVisen_ai"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <i class="fab fa-twitter"></i> Twitter
-              </a>
-
-              <a
-                href="https://www.facebook.com/share/1AGyjTNh1D/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <i class="fab fa-facebook-f"></i> Facebook
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Bottom Copyright -->
-        <div class="footer-bottom">
-          <p>
-            &copy; 2026 PiVisen. All Rights Reserved. Edge Vision. Unified
-            Intelligence.
-          </p>
-        </div>
-      </div>
-    </footer>
-
-    <!-- Scroll to Top Button -->
-    <button
-      id="projectsScrollBtn"
-      class="projects-scroll-top scroll-top-btn"
-      aria-label="Scroll to top"
-    >
-      <svg
-        class="scroll-progress-ring"
-        viewBox="0 0 50 50"
-        width="50"
-        height="50"
-      >
-        <circle class="ring-progress" cx="25" cy="25" r="23"></circle>
-      </svg>
-      <i class="fas fa-arrow-up"></i>
+  <body data-page="projects">
+    <!-- @header -->
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header" data-header>
+  <div class="container header-inner">
+    <a class="brand" href="/" aria-label="PiVisen AI home">
+      <img src="/assets/images/logo-mark.webp" width="36" height="36" alt="" />
+      <span class="brand-name">PiVisen <span>AI</span></span>
+    </a>
+    <nav class="site-nav" id="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="/services" data-nav="services">Services</a></li>
+        <li><a href="/projects" data-nav="projects" aria-current="page">Products</a></li>
+        <li><a href="/technologies" data-nav="technologies">Technology</a></li>
+        <li><a href="/about" data-nav="about">About</a></li>
+        <li><a href="/blog" data-nav="blog">Blog</a></li>
+        <li><a href="/contact" data-nav="contact">Contact</a></li>
+        <li class="nav-cta"><a class="btn btn-primary" href="/contact#contact-form">Start a project</a></li>
+      </ul>
+    </nav>
+    <a class="btn btn-primary btn-sm header-cta" href="/contact#contact-form">Start a project</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+      <svg class="icon icon-open" aria-hidden="true"><use href="/assets/images/icons.svg#menu"></use></svg>
+      <svg class="icon icon-close" aria-hidden="true"><use href="/assets/images/icons.svg#close"></use></svg>
     </button>
+  </div>
+</header>
+<!-- /@header -->
+    <main id="main">
+      <section class="page-hero" aria-labelledby="page-title">
+        <div class="container page-hero-split">
+          <div>
+            <nav class="breadcrumbs" aria-label="Breadcrumb">
+              <ol><li><a href="/">Home</a></li><li><span aria-current="page">Products: PiLENS</span></li></ol>
+            </nav>
+            <p class="eyebrow">Our first product</p>
+            <h1 id="page-title">PiLENS: the AI security camera that <span class="gradient-text">checks before it alerts</span></h1>
+            <p class="lead">PiLENS watches your camera on a small, low-cost device (Raspberry Pi 5). It detects theft and violent incidents in real time and alerts you, but only after a second AI check has confirmed the event. It needs no GPU, and your video never has to leave your premises.</p>
+            <div class="btn-group">
+              <a class="btn btn-primary btn-lg" href="/contact?topic=pilens#contact-form">Talk to us about PiLENS <svg class="icon" aria-hidden="true"><use href="/assets/images/icons.svg#arrow-right"></use></svg></a>
+            </div>
+          </div>
+          <img class="device-art" src="/assets/images/pilens-device.svg" width="520" height="440" alt="Illustration of the PiLENS unit: a camera on a small AI box, with three stages labelled detect, check and alert" fetchpriority="high" />
+        </div>
+      </section>
 
-    <!-- External Script Integration -->
-    <script src="assets/js/main.js"></script>
+      <section class="section section-tight" aria-labelledby="what-title">
+        <div class="container">
+          <div class="section-head reveal">
+            <p class="eyebrow">What it does</p>
+            <h2 id="what-title">Fewer false alarms. Faster response. Private by design.</h2>
+          </div>
+          <div class="grid grid-4 reveal-stagger">
+            <div class="card">
+              <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="/assets/images/icons.svg#eye"></use></svg></span>
+              <h3>Detects in real time</h3>
+              <p>Spots theft and violent incidents as they happen, from your camera's live video.</p>
+            </div>
+            <div class="card">
+              <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="/assets/images/icons.svg#shield"></use></svg></span>
+              <h3>Double-checks every alert</h3>
+              <p>A second AI check reviews each event before you are told, so you get fewer false alarms.</p>
+            </div>
+            <div class="card">
+              <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="/assets/images/icons.svg#chip"></use></svg></span>
+              <h3>No GPU needed</h3>
+              <p>Runs on a Raspberry Pi 5 CPU. No expensive graphics card and no server room.</p>
+            </div>
+            <div class="card">
+              <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="/assets/images/icons.svg#lock"></use></svg></span>
+              <h3>Video stays on site</h3>
+              <p>All processing happens on the device at your premises. Your footage does not go to the cloud.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="who-title">
+        <div class="container">
+          <div class="section-head reveal">
+            <p class="eyebrow">Who it's for</p>
+            <h2 id="who-title">Built for places that can't afford to miss a moment</h2>
+            <p>PiLENS is designed for small and medium sites where nobody has time to watch screens all day.</p>
+          </div>
+          <div class="audience reveal-stagger">
+            <div class="card"><span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="/assets/images/icons.svg#store"></use></svg></span><h3>Shops</h3><p>Get alerted to theft on the shop floor while you serve customers.</p></div>
+            <div class="card"><span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="/assets/images/icons.svg#pharmacy"></use></svg></span><h3>Pharmacies</h3><p>Keep an eye on high-value stock and on the safety of staff at the counter.</p></div>
+            <div class="card"><span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="/assets/images/icons.svg#office"></use></svg></span><h3>Offices</h3><p>Know when something goes wrong at reception, in corridors or after hours.</p></div>
+            <div class="card"><span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="/assets/images/icons.svg#home"></use></svg></span><h3>Homes</h3><p>Real-time alerts for your family, with video that stays inside your home.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-alt" aria-labelledby="how-title">
+        <div class="container">
+          <div class="section-head reveal">
+            <p class="eyebrow">How it works</p>
+            <h2 id="how-title">Three simple steps</h2>
+          </div>
+          <ol class="steps reveal-stagger" role="list">
+            <li class="card step"><h3>Watch</h3><p>Your camera streams video to the PiLENS unit on site. PiLENS looks at the video in short clips, continuously.</p></li>
+            <li class="card step"><h3>Detect and double-check</h3><p>On-device AI looks for signs of theft or violence in each clip. When it finds one, a second AI check reviews the event to rule out a false alarm.</p></li>
+            <li class="card step"><h3>Alert</h3><p>Only confirmed events reach you, so you can act quickly and spend less time on false alarms.</p></li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="numbers-title">
+        <div class="container">
+          <div class="section-head reveal">
+            <p class="eyebrow">Measured in our tests</p>
+            <h2 id="numbers-title">The numbers behind PiLENS</h2>
+          </div>
+          <div class="facts facts-lg reveal-stagger">
+            <p class="fact"><svg class="icon" aria-hidden="true"><use href="/assets/images/icons.svg#zap"></use></svg><span>Checks each 2.4-second video clip in about 0.14 seconds on a Raspberry Pi 5 CPU.</span></p>
+            <p class="fact"><svg class="icon" aria-hidden="true"><use href="/assets/images/icons.svg#clock"></use></svg><span>Ran 2 hours live at 30 frames per second without dropping a frame.</span></p>
+            <p class="fact"><svg class="icon" aria-hidden="true"><use href="/assets/images/icons.svg#shield"></use></svg><span>A second AI check cut false alerts on normal test videos from 16.4% to 3.6%.</span></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-tight" aria-labelledby="cta-title">
+        <div class="container">
+          <div class="cta-band reveal">
+            <p class="eyebrow">PiLENS</p>
+            <h2 id="cta-title">Want PiLENS watching your site?</h2>
+            <p>Tell us about your premises and your cameras. We'll tell you honestly whether PiLENS is a good fit today.</p>
+            <div class="btn-group">
+              <a class="btn btn-primary btn-lg" href="/contact?topic=pilens#contact-form">Talk to us <svg class="icon" aria-hidden="true"><use href="/assets/images/icons.svg#arrow-right"></use></svg></a>
+            </div>
+            <p class="status-note">PiLENS is in active development. Availability depends on your site.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- @footer -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="/" aria-label="PiVisen AI home">
+          <img src="/assets/images/logo-mark.webp" width="36" height="36" alt="" loading="lazy" />
+          <span class="brand-name">PiVisen <span>AI</span></span>
+        </a>
+        <p>A technology start-up that builds AI products and software for businesses, from Bahawalpur, Pakistan.</p>
+        <p class="footer-tagline">Edge Vision • Unified Intelligence</p>
+      </div>
+      <div class="footer-col">
+        <h2>Company</h2>
+        <ul>
+          <li><a href="/about">About us</a></li>
+          <li><a href="/projects">PiLENS (product)</a></li>
+          <li><a href="/technologies">Technology</a></li>
+          <li><a href="/blog">Blog</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h2>Services</h2>
+        <ul>
+          <li><a href="/services#computer-vision-edge-ai">Computer Vision &amp; Edge AI</a></li>
+          <li><a href="/services#night-surveillance">Night Surveillance Systems</a></li>
+          <li><a href="/services#cloud-ai-deep-learning">Cloud AI &amp; Deep Learning</a></li>
+          <li><a href="/services#machine-learning-engineering">Machine Learning Engineering</a></li>
+          <li><a href="/services#python-backend-apis">Python Backend &amp; APIs</a></li>
+          <li><a href="/services#intelligent-software">Intelligent Software Solutions</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h2>Get in touch</h2>
+        <ul>
+          <li><a href="mailto:info@pivisen.com"><svg class="icon" aria-hidden="true"><use href="/assets/images/icons.svg#mail"></use></svg>info@pivisen.com</a></li>
+          <li><a href="tel:+923020022779"><svg class="icon" aria-hidden="true"><use href="/assets/images/icons.svg#phone"></use></svg>+92&nbsp;302&nbsp;0022779</a></li>
+          <li><svg class="icon" aria-hidden="true"><use href="/assets/images/icons.svg#pin"></use></svg>Bahawalpur, Pakistan</li>
+          <li><a href="https://www.linkedin.com/company/pivisen/posts/?feedView=all" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="/assets/images/icons.svg#linkedin"></use></svg>LinkedIn</a></li>
+          <li><a href="https://www.facebook.com/share/1AGyjTNh1D/" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="/assets/images/icons.svg#facebook"></use></svg>Facebook</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© <span id="year">2026</span> PiVisen AI. All rights reserved.</p>
+      <p>Edge Vision • Unified Intelligence</p>
+    </div>
+  </div>
+</footer>
+<!-- /@footer -->
   </body>
 </html>

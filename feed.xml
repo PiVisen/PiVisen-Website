@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>PiVisen AI Blog</title>
+    <link>https://pivisen.com/blog</link>
+    <atom:link href="https://pivisen.com/feed.xml" rel="self" type="application/rss+xml" />
+    <description>Plain-English articles on AI, computer vision, edge AI, security and software for businesses.</description>
+    <language>en</language>
+    <lastBuildDate>Sun, 25 Oct 2026 12:00:00 +0500</lastBuildDate>
+    <image>
+      <url>https://pivisen.com/assets/images/logo.png</url>
+      <title>PiVisen AI Blog</title>
+      <link>https://pivisen.com/blog</link>
+    </image>
+    <item>
+      <title>How AI cameras turn video into alerts: a guide for shop owners</title>
+      <link>https://pivisen.com/blog/how-ai-cameras-turn-video-into-alerts</link>
+      <guid isPermaLink="true">https://pivisen.com/blog/how-ai-cameras-turn-video-into-alerts</guid>
+      <pubDate>Sun, 25 Oct 2026 12:00:00 +0500</pubDate>
+      <category>Security</category>
+      <dc:creator>PiVisen AI Team</dc:creator>
+      <description>What happens between a camera seeing something and your phone buzzing, in plain English, and what to ask before you buy an AI camera for your shop.</description>
+      <enclosure url="https://pivisen.com/assets/images/blog/cover-ai-camera-alerts.webp" type="image/webp" length="92068" />
+    </item>
+    <item>
+      <title>Edge AI vs cloud AI: when to use which</title>
+      <link>https://pivisen.com/blog/edge-ai-vs-cloud-ai</link>
+      <guid isPermaLink="true">https://pivisen.com/blog/edge-ai-vs-cloud-ai</guid>
+      <pubDate>Sun, 25 Oct 2026 11:00:00 +0500</pubDate>
+      <category>Edge AI</category>
+      <dc:creator>PiVisen AI Team</dc:creator>
+      <description>Should your AI run on a small device on site or on servers in the cloud? A practical comparison of speed, cost, privacy and upkeep, with a simple guide.</description>
+      <enclosure url="https://pivisen.com/assets/images/blog/cover-edge-vs-cloud.webp" type="image/webp" length="102512" />
+    </item>
+    <item>
+      <title>Why false alarms matter in AI security, and how to reduce them</title>
+      <link>https://pivisen.com/blog/reducing-false-alarms-in-ai-security</link>
+      <guid isPermaLink="true">https://pivisen.com/blog/reducing-false-alarms-in-ai-security</guid>
+      <pubDate>Sun, 25 Oct 2026 10:00:00 +0500</pubDate>
+      <category>AI</category>
+      <dc:creator>PiVisen AI Team</dc:creator>
+      <description>False alarms teach people to ignore alerts. Here is why AI security systems raise them, and seven practical ways to cut them down.</description>
+      <enclosure url="https://pivisen.com/assets/images/blog/cover-false-alarms.webp" type="image/webp" length="82670" />
+    </item>
+    <item>
+      <title>What is computer vision? A plain guide for business owners</title>
+      <link>https://pivisen.com/blog/what-is-computer-vision</link>
+      <guid isPermaLink="true">https://pivisen.com/blog/what-is-computer-vision</guid>
+      <pubDate>Sun, 25 Oct 2026 09:00:00 +0500</pubDate>
+      <category>Computer Vision</category>
+      <dc:creator>PiVisen AI Team</dc:creator>
+      <description>Computer vision lets software understand images and video. Here is how it works, what it can do for a business, where it struggles and how to start small.</description>
+      <enclosure url="https://pivisen.com/assets/images/blog/cover-computer-vision.webp" type="image/webp" length="101782" />
+    </item>
+    <item>
+      <title>Building an AI product from idea to prototype: the PiLENS story</title>
+      <link>https://pivisen.com/blog/building-pilens-from-idea-to-prototype</link>
+      <guid isPermaLink="true">https://pivisen.com/blog/building-pilens-from-idea-to-prototype</guid>
+      <pubDate>Sun, 25 Oct 2026 08:00:00 +0500</pubDate>
+      <category>Company News</category>
+      <dc:creator>PiVisen AI Team</dc:creator>
+      <description>How we approached PiLENS, our first product: the problem, the limits we set ourselves, how the system works and the numbers we measured in our tests.</description>
+      <enclosure url="https://pivisen.com/assets/images/blog/cover-pilens-story.webp" type="image/webp" length="76120" />
+    </item>
+  </channel>
+</rss>
