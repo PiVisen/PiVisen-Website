@@ -1,0 +1,13 @@
+# ==========================================
+# PiVisen Robots.txt
+# ==========================================
+
+User-agent: *
+
+Allow: /
+
+Disallow: /admin/
+Disallow: /private/
+Disallow: /temp/
+
+Sitemap: https://www.pivisen.com/sitemap.xml
