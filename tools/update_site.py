@@ -93,7 +93,7 @@ def write_if_changed(path, text):
 
 def replace_region(text, name, content, path):
     """Replace everything between <!-- @name --> and <!-- /@name -->."""
-    pattern = re.compile(r"(<!-- @%s[^>]*-->)(.*?)(<!-- /@%s -->)" % (re.escape(name), re.escape(name)), re.S)
+    pattern = re.compile(r"(<!-- @%s(?:[\s:][^>]*)?-->)(.*?)(<!-- /@%s -->)" % (re.escape(name), re.escape(name)), re.S)
     if not pattern.search(text):
         errors.append("%s: missing <!-- @%s --> markers" % (path.relative_to(ROOT), name))
         return text
@@ -356,6 +356,7 @@ def build_blog_index(posts):
                                cat=esc(d["category"]), slug=featured["slug"], title=esc(d["title"]), summary=esc(d["summary"]),
                                iso=featured["date"].isoformat(), date=human_date(featured["date"]), rt=d["readingTime"], author=esc(d["author"]))
         text = replace_region(text, "featured", feat, path)
+        text = replace_region(text, "featured-preload", '    <link rel="preload" as="image" href="{0}" imagesrcset="{1} 640w, {0} 1200w" imagesizes="(min-width: 900px) 640px, 100vw" fetchpriority="high" />'.format(d["cover"], d["cover"].replace(".webp", "-640.webp")), path)
     text = replace_region(text, "posts", "\n".join(post_card(p) for p in published), path)
     blog_ld = {
         "@context": "https://schema.org",
