@@ -3,6 +3,7 @@
    1. Header & mobile menu   4. Contact form (EmailJS)
    2. Scroll reveal          5. Blog index: search & categories
    3. Footer year            6. Blog post: contents, share links
+   7. Card spotlight         8. Typewriter
    ===================================================================== */
 (function () {
   "use strict";
@@ -20,10 +21,15 @@
   // Back-to-top button: shows after 300px and fills its ring as you scroll
   var topBtn = document.querySelector("[data-scroll-top]");
   var ring = topBtn && topBtn.querySelector(".ring-progress");
+  var pctLabel = topBtn && topBtn.querySelector(".scroll-pct");
   if (topBtn) {
     topBtn.addEventListener("click", function () {
+      topBtn.classList.remove("is-clicked");
+      void topBtn.offsetWidth; // restart the highlight pulse
+      topBtn.classList.add("is-clicked");
       window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
     });
+    topBtn.addEventListener("animationend", function () { topBtn.classList.remove("is-clicked"); });
   }
   var ticking = false;
   function updateTopBtn() {
@@ -32,6 +38,7 @@
     var progress = max > 0 ? Math.min(1, window.scrollY / max) : 0;
     topBtn.classList.toggle("show", window.scrollY > 300);
     if (ring) ring.style.strokeDashoffset = String(100 - progress * 100);
+    if (pctLabel) pctLabel.textContent = Math.round(progress * 100) + "%";
   }
 
   window.addEventListener("scroll", function () {
@@ -311,4 +318,37 @@
       }
     });
   }
+
+  /* 7. CARD SPOTLIGHT: soft glow follows the cursor on cards --------- */
+  if (!reduceMotion && window.matchMedia("(hover: hover)").matches) {
+    document.addEventListener("pointermove", function (e) {
+      var card = e.target.closest && e.target.closest(".card");
+      if (!card) return;
+      var r = card.getBoundingClientRect();
+      card.style.setProperty("--mx", (e.clientX - r.left) + "px");
+      card.style.setProperty("--my", (e.clientY - r.top) + "px");
+    }, { passive: true });
+  }
+
+  /* 8. TYPEWRITER: types and erases a list of phrases ---------------- */
+  document.querySelectorAll("[data-typewriter]").forEach(function (el) {
+    var words;
+    try { words = JSON.parse(el.getAttribute("data-typewriter")); } catch (err) { return; }
+    if (!words || !words.length || reduceMotion) return; // keep the first phrase as static text
+    var w = 0, c = words[0].length, deleting = true;
+    function tick() {
+      var word = words[w];
+      if (deleting) {
+        c--;
+        el.textContent = word.slice(0, c);
+        if (c === 0) { deleting = false; w = (w + 1) % words.length; return setTimeout(tick, 350); }
+        return setTimeout(tick, 35);
+      }
+      c++;
+      el.textContent = words[w].slice(0, c);
+      if (c === words[w].length) { deleting = true; return setTimeout(tick, 2200); }
+      setTimeout(tick, 65);
+    }
+    setTimeout(tick, 2200);
+  });
 })();

@@ -101,10 +101,12 @@
     <main id="main">
       <!-- HERO -->
       <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-aurora" aria-hidden="true"><span></span><span></span></div>
         <div class="container hero-grid">
           <div>
             <p class="eyebrow">Edge Vision • Unified Intelligence</p>
             <h1 id="hero-title">We build AI that sees — and <span class="gradient-text">software that puts it to work.</span></h1>
+            <p class="typeline" aria-hidden="true"><span class="typeline-prompt">&gt;</span>building<span class="typeline-text" data-typewriter='["computer vision systems","edge AI on small devices","night surveillance systems","cloud AI pipelines","machine learning models","Python back-ends &amp; APIs","intelligent software"]'>computer vision systems</span><span class="typeline-caret"></span></p>
             <p class="lead">PiVisen AI designs computer vision, edge AI and cloud AI systems, and the Python software that connects them. We build for real hardware and real budgets, from a camera in a shop to an API in the cloud.</p>
             <div class="btn-group">
               <a class="btn btn-primary btn-lg" href="/contact#contact-form">Start a project <svg class="icon" aria-hidden="true"><use href="/assets/images/icons.svg#arrow-right"></use></svg></a>
@@ -129,6 +131,14 @@
               <span>How an AI camera tracks people and double-checks an event before alerting.</span>
             </figcaption>
           </figure>
+        </div>
+      </section>
+
+      <!-- TOOLS MARQUEE -->
+      <section class="marquee" aria-label="Technologies we work with">
+        <div class="marquee-track">
+          <ul><li>Python</li><li>PyTorch</li><li>TensorFlow</li><li>Computer Vision</li><li>Raspberry Pi 5</li><li>Edge AI</li><li>PostgreSQL</li><li>REST APIs</li><li>Cloud AI</li><li>Deep Learning</li></ul>
+          <ul aria-hidden="true"><li>Python</li><li>PyTorch</li><li>TensorFlow</li><li>Computer Vision</li><li>Raspberry Pi 5</li><li>Edge AI</li><li>PostgreSQL</li><li>REST APIs</li><li>Cloud AI</li><li>Deep Learning</li></ul>
         </div>
       </section>
 
@@ -335,6 +345,7 @@
 <button class="scroll-top-btn" type="button" aria-label="Back to top" data-scroll-top>
   <svg class="scroll-progress-ring" viewBox="0 0 52 52" aria-hidden="true"><circle class="ring-track" cx="26" cy="26" r="24"></circle><circle class="ring-progress" cx="26" cy="26" r="24" pathLength="100"></circle></svg>
   <svg class="icon" aria-hidden="true"><use href="/assets/images/icons.svg#arrow-up"></use></svg>
+  <span class="scroll-pct" aria-hidden="true">0%</span>
 </button>
 <!-- /@footer -->
   </body>
