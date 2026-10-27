@@ -40,6 +40,7 @@ PAGES = [  # (file, url path) in the order they appear in the sitemap
     ("about.html", "/about"),
     ("blog.html", "/blog"),
     ("contact.html", "/contact"),
+    ("privacy.html", "/privacy"),
 ]
 AUTHORS = {
     "PiVisen AI Team": {

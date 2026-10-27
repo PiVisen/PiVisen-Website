@@ -1,16 +1,19 @@
 /* =====================================================================
    PiVisen AI — site script (loaded with `defer` on every page)
-   1. Header & mobile menu   4. Contact form (EmailJS)
-   2. Scroll reveal          5. Blog index: search & categories
-   3. Footer year            6. Blog post: contents, share links
-   7. Card spotlight         8. Typewriter
+   ---------------------------------------------------------------------
+   1. Header, mobile menu & back-to-top   6. Blog post: contents, share
+   2. Scroll reveal                       7. Card spotlight
+   3. Footer year                         8. Typewriter
+   4. Contact form (EmailJS)              9. 3D tilt for hero visuals
+   5. Blog index: search & categories
+   The home page animation lives in hero-vision.js.
    ===================================================================== */
 (function () {
   "use strict";
 
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* 1. HEADER & MOBILE MENU ------------------------------------------- */
+  /* 1. HEADER, MOBILE MENU & BACK-TO-TOP ----------------------------- */
   var header = document.querySelector("[data-header]");
   var toggle = document.querySelector(".nav-toggle");
   var nav = document.getElementById("site-nav");
@@ -351,4 +354,33 @@
     }
     setTimeout(tick, 2200);
   });
+
+  /* 9. 3D TILT: hero visuals lean towards the pointer ---------------- */
+  if (!reduceMotion && window.matchMedia("(hover: hover)").matches) {
+    document.querySelectorAll("[data-tilt]").forEach(function (wrap) {
+      var inner = wrap.querySelector(".tilt-inner");
+      var area = wrap.closest("section") || wrap;
+      if (!inner) return;
+      var frame = 0;
+      area.addEventListener("pointermove", function (e) {
+        if (frame) return;
+        frame = requestAnimationFrame(function () {
+          frame = 0;
+          var r = wrap.getBoundingClientRect();
+          var x = (e.clientX - (r.left + r.width / 2)) / (r.width / 2);
+          var y = (e.clientY - (r.top + r.height / 2)) / (r.height / 2);
+          x = Math.max(-1, Math.min(1, x));
+          y = Math.max(-1, Math.min(1, y));
+          wrap.classList.add("is-tilting");
+          inner.style.setProperty("--ry", (x * 8).toFixed(2) + "deg");
+          inner.style.setProperty("--rx", (-y * 6).toFixed(2) + "deg");
+        });
+      });
+      area.addEventListener("pointerleave", function () {
+        wrap.classList.remove("is-tilting");
+        inner.style.setProperty("--ry", "0deg");
+        inner.style.setProperty("--rx", "0deg");
+      });
+    });
+  }
 })();
