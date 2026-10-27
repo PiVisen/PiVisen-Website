@@ -106,8 +106,8 @@
   /* 4. CONTACT FORM (EmailJS) -----------------------------------------
      Same EmailJS account as before: service, template and public key are
      unchanged. We call the EmailJS REST endpoint directly, so no extra
-     script has to load. Both the old home-page and old contact-page field
-     names are sent, so the existing email template keeps working. */
+     script has to load. Each form field is sent as its own template
+     variable: {{name}}, {{email}}, {{company}}, {{subject}}, {{message}}. */
   var EMAILJS = {
     serviceId: "service_ll6ox79",
     templateId: "template_bc0wtu9",
@@ -120,18 +120,19 @@
     var statusBox = form.querySelector(".form-status");
     var submitBtn = form.querySelector('button[type="submit"]');
 
-    // Pre-select a topic from links such as /contact?topic=pilens#contact-form
+    // Pre-select a subject from links such as /contact?topic=pilens#contact-form
     var params = new URLSearchParams(window.location.search);
     var topic = params.get("topic");
-    if (topic && form.topic) {
-      var match = Array.prototype.find.call(form.topic.options, function (o) { return o.dataset.key === topic; });
-      if (match) form.topic.value = match.value;
+    var subjectField = form.elements.subject;
+    if (topic && subjectField) {
+      var match = Array.prototype.find.call(subjectField.options, function (o) { return o.dataset.key === topic; });
+      if (match) subjectField.value = match.value;
     }
 
     var rules = {
       name: function (v) { return v.trim().length >= 2 || "Please enter your name."; },
       email: function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()) || "Please enter a valid email address."; },
-      topic: function (v) { return v !== "" || "Please choose what you need help with."; },
+      subject: function (v) { return v !== "" || "Please choose what you need help with."; },
       message: function (v) { return v.trim().length >= 20 || "Please tell us a little more (at least 20 characters)."; }
     };
 
@@ -179,25 +180,16 @@
         name: form.elements.name.value.trim(),
         email: form.elements.email.value.trim(),
         company: form.elements.company ? form.elements.company.value.trim() : "",
-        topic: form.elements.topic.value,
+        subject: form.elements.subject.value,
         message: form.elements.message.value.trim()
       };
-      var fullMessage = data.message + (data.company ? "\n\nCompany: " + data.company : "");
+      // Each field goes to EmailJS as its own template variable; the message is sent exactly as typed.
       var templateParams = {
-        // field names used by the old home-page form
-        from_name: data.name,
-        from_email: data.email,
-        subject: "Website enquiry: " + data.topic,
-        message: fullMessage,
-        // field names used by the old contact-page form
-        user_name: data.name,
-        user_email: data.email,
-        project_type: data.topic,
-        project_details: fullMessage,
-        // extras
-        reply_to: data.email,
+        name: data.name,
+        email: data.email,
         company: data.company,
-        page: window.location.href
+        subject: data.subject,
+        message: data.message
       };
 
       submitBtn.disabled = true;
