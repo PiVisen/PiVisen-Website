@@ -65,6 +65,52 @@
       "name": "PiVisen AI",
       "inLanguage": "en",
       "publisher": { "@id": "https://pivisen.com/#organization" }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://pivisen.com/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What does PiVisen AI do?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We build AI products and software for businesses: computer vision and edge AI, night surveillance systems, cloud AI and deep learning, machine learning, Python back-ends and APIs, and complete AI applications. Our first product is PiLENS, an AI security camera unit."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need a GPU or expensive servers to use AI?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not always. Many vision tasks can run on small, low-cost devices. PiLENS, for example, runs on a Raspberry Pi 5 CPU without a GPU. When a job needs more power, we use the cloud."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Will my camera footage leave my premises?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "With an edge set-up, it does not have to. We design systems so that video is processed on a device at your site and only alerts or small summaries are sent out."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you work with the cameras I already have?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Often, yes. It depends on the camera's quality, position and lighting, so we check that first and tell you honestly what will work."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do we start a project?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Send us a message through the contact form. We reply by email, set up a short call if it looks like a fit, and suggest the smallest version worth building first."
+          }
+        }
+      ]
     }
   ]
 }
@@ -118,7 +164,8 @@
               <li><svg class="icon" aria-hidden="true"><use href="/assets/images/icons.svg#code"></use></svg>Python from model to API</li>
             </ul>
           </div>
-          <figure class="vision-panel">
+          <div class="hero-visual" data-tilt>
+          <figure class="vision-panel tilt-inner">
             <div class="vision-bar" aria-hidden="true">
               <span class="dots"><span></span><span></span><span></span></span>
               <span>CAM 01 · SHOP FLOOR</span>
@@ -131,14 +178,17 @@
               <span>How an AI camera tracks people and double-checks an event before alerting.</span>
             </figcaption>
           </figure>
+          </div>
         </div>
       </section>
 
-      <!-- TOOLS MARQUEE -->
-      <section class="marquee" aria-label="Technologies we work with">
-        <div class="marquee-track">
-          <ul><li>Python</li><li>PyTorch</li><li>TensorFlow</li><li>Computer Vision</li><li>Raspberry Pi 5</li><li>Edge AI</li><li>PostgreSQL</li><li>REST APIs</li><li>Cloud AI</li><li>Deep Learning</li></ul>
-          <ul aria-hidden="true"><li>Python</li><li>PyTorch</li><li>TensorFlow</li><li>Computer Vision</li><li>Raspberry Pi 5</li><li>Edge AI</li><li>PostgreSQL</li><li>REST APIs</li><li>Cloud AI</li><li>Deep Learning</li></ul>
+      <!-- TOOLS & CAPABILITIES MARQUEE: two rows moving in opposite directions -->
+      <section class="marquee" aria-label="Technologies and capabilities">
+        <div class="marquee-row">
+          <div class="marquee-track"><ul><li>Python</li><li>PyTorch</li><li>TensorFlow</li><li>Raspberry Pi 5</li><li>PostgreSQL</li><li>REST APIs</li><li>Edge AI</li><li>Cloud AI</li><li>Deep Learning</li><li>Computer Vision</li></ul><ul aria-hidden="true"><li>Python</li><li>PyTorch</li><li>TensorFlow</li><li>Raspberry Pi 5</li><li>PostgreSQL</li><li>REST APIs</li><li>Edge AI</li><li>Cloud AI</li><li>Deep Learning</li><li>Computer Vision</li></ul></div>
+        </div>
+        <div class="marquee-row marquee-row--reverse">
+          <div class="marquee-track"><ul><li>Object detection</li><li>People tracking</li><li>Night-time vision</li><li>On-device inference</li><li>Real-time alerts</li><li>Second-check verification</li><li>Dashboards</li><li>Automation</li><li>Privacy by design</li><li>Python back-ends</li></ul><ul aria-hidden="true"><li>Object detection</li><li>People tracking</li><li>Night-time vision</li><li>On-device inference</li><li>Real-time alerts</li><li>Second-check verification</li><li>Dashboards</li><li>Automation</li><li>Privacy by design</li><li>Python back-ends</li></ul></div>
         </div>
       </section>
 
@@ -215,6 +265,25 @@
         </div>
       </section>
 
+      <!-- WHO WE BUILD FOR -->
+      <section class="section section-alt" aria-labelledby="who-title">
+        <div class="container">
+          <div class="section-head reveal">
+            <p class="eyebrow">Who we build for</p>
+            <h2 id="who-title">AI for the places where work actually happens</h2>
+            <p>From a single shop to a production line, we design systems around real sites, real cameras and real budgets.</p>
+          </div>
+          <div class="grid grid-3 reveal-stagger">
+            <div class="card"><span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="/assets/images/icons.svg#store"></use></svg></span><h3>Shops &amp; retail</h3><p>Spot theft and incidents on the shop floor while staff serve customers.</p></div>
+            <div class="card"><span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="/assets/images/icons.svg#pharmacy"></use></svg></span><h3>Pharmacies</h3><p>Watch high-value stock and keep counter staff safe.</p></div>
+            <div class="card"><span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="/assets/images/icons.svg#office"></use></svg></span><h3>Offices &amp; workplaces</h3><p>Know when something goes wrong at reception, in corridors or after hours.</p></div>
+            <div class="card"><span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="/assets/images/icons.svg#home"></use></svg></span><h3>Homes</h3><p>Real-time alerts with video that stays inside the house.</p></div>
+            <div class="card"><span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="/assets/images/icons.svg#target"></use></svg></span><h3>Factories &amp; warehouses</h3><p>Camera-based checks on production lines, stock and safety.</p></div>
+            <div class="card"><span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="/assets/images/icons.svg#code"></use></svg></span><h3>Software teams</h3><p>Add computer vision or machine learning to your product through clean APIs.</p></div>
+          </div>
+        </div>
+      </section>
+
       <!-- HOW WE WORK -->
       <section class="section" aria-labelledby="process-title">
         <div class="container">
@@ -228,10 +297,21 @@
             <li class="card step"><h3>Build for production</h3><p>We make the model, the software around it and the hardware it runs on ready for daily use.</p></li>
             <li class="card step"><h3>Deploy and improve</h3><p>We help you install it, watch how it performs and keep improving it as your needs change.</p></li>
           </ol>
-          <div class="principles mt-7 reveal-stagger">
-            <div class="principle"><h3>Edge-first by design</h3><p>We make AI run on affordable devices close to the camera. That keeps costs, delays and data exposure down.</p></div>
-            <div class="principle"><h3>Honest numbers</h3><p>We only quote results we have measured ourselves, and we tell you how we measured them.</p></div>
-            <div class="principle"><h3>One team, end to end</h3><p>Models, back-end, apps and device set-up come from one small team, so nothing gets lost between vendors.</p></div>
+        </div>
+      </section>
+
+      <!-- CORE VALUES -->
+      <section class="section" aria-labelledby="values-title">
+        <div class="container">
+          <div class="section-head center reveal">
+            <p class="eyebrow">Our core values</p>
+            <h2 id="values-title">Four values behind <span class="gradient-text">everything we build</span></h2>
+          </div>
+          <div class="grid grid-4 reveal-stagger">
+            <div class="card value-card"><span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="/assets/images/icons.svg#target"></use></svg></span><h3>Useful over flashy</h3><p>We judge our work by the problem it solves, not by how impressive the demo looks.</p></div>
+            <div class="card value-card"><span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="/assets/images/icons.svg#shield"></use></svg></span><h3>Honest about limits</h3><p>We tell you what AI can and cannot do for you, and we share the numbers we measured.</p></div>
+            <div class="card value-card"><span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="/assets/images/icons.svg#lock"></use></svg></span><h3>Privacy first</h3><p>Data stays as close to its source as possible. We only move what needs to move.</p></div>
+            <div class="card value-card"><span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="/assets/images/icons.svg#chip"></use></svg></span><h3>Built for real hardware</h3><p>We design for devices and budgets that real businesses can afford.</p></div>
           </div>
         </div>
       </section>
@@ -275,6 +355,39 @@
 <!-- /@latest-posts -->
           </div>
           <p class="mt-6"><a class="text-link" href="/blog">Read all articles on the blog <svg class="icon" aria-hidden="true"><use href="/assets/images/icons.svg#arrow-right"></use></svg></a></p>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section class="section section-tight" aria-labelledby="faq-title">
+        <div class="container faq-layout">
+          <div class="section-head reveal">
+            <p class="eyebrow">FAQ</p>
+            <h2 id="faq-title">Questions we hear often</h2>
+            <p>Still unsure? <a href="/contact#contact-form">Ask us directly</a>. We reply to every message.</p>
+          </div>
+          <div class="faq-list reveal">
+            <details class="faq-item" open>
+              <summary>What does PiVisen AI do?<span class="faq-icon" aria-hidden="true"></span></summary>
+              <p>We build AI products and software for businesses: computer vision and edge AI, night surveillance systems, cloud AI and deep learning, machine learning, Python back-ends and APIs, and complete AI applications. Our first product is PiLENS, an AI security camera unit.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Do I need a GPU or expensive servers to use AI?<span class="faq-icon" aria-hidden="true"></span></summary>
+              <p>Not always. Many vision tasks can run on small, low-cost devices. PiLENS, for example, runs on a Raspberry Pi 5 CPU without a GPU. When a job needs more power, we use the cloud.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Will my camera footage leave my premises?<span class="faq-icon" aria-hidden="true"></span></summary>
+              <p>With an edge set-up, it does not have to. We design systems so that video is processed on a device at your site and only alerts or small summaries are sent out.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Can you work with the cameras I already have?<span class="faq-icon" aria-hidden="true"></span></summary>
+              <p>Often, yes. It depends on the camera's quality, position and lighting, so we check that first and tell you honestly what will work.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How do we start a project?<span class="faq-icon" aria-hidden="true"></span></summary>
+              <p>Send us a message through the contact form. We reply by email, set up a short call if it looks like a fit, and suggest the smallest version worth building first.</p>
+            </details>
+          </div>
         </div>
       </section>
 
@@ -338,12 +451,12 @@
     </div>
     <div class="footer-bottom">
       <p>© <span id="year">2026</span> PiVisen AI. All rights reserved.</p>
-      <p>Edge Vision • Unified Intelligence</p>
+      <p><a href="/privacy">Privacy notice</a> · Edge Vision • Unified Intelligence</p>
     </div>
   </div>
 </footer>
 <button class="scroll-top-btn" type="button" aria-label="Back to top" data-scroll-top>
-  <svg class="scroll-progress-ring" viewBox="0 0 52 52" aria-hidden="true"><circle class="ring-track" cx="26" cy="26" r="24"></circle><circle class="ring-progress" cx="26" cy="26" r="24" pathLength="100"></circle></svg>
+  <svg class="scroll-progress-ring" viewBox="0 0 58 58" aria-hidden="true"><circle class="ring-track" cx="29" cy="29" r="27"></circle><circle class="ring-progress" cx="29" cy="29" r="27" pathLength="100"></circle></svg>
   <svg class="icon" aria-hidden="true"><use href="/assets/images/icons.svg#arrow-up"></use></svg>
   <span class="scroll-pct" aria-hidden="true">0%</span>
 </button>

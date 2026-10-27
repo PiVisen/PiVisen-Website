@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# This is PiVisen Website
-=======
 # PiVisen AI website
 
 The company website for **PiVisen AI** — live at <https://pivisen.com>, hosted on Vercel.
@@ -15,9 +12,10 @@ Plain HTML, CSS and JavaScript. No framework and no build step: Vercel publishes
 | `blog.html` | Blog index (`/blog`) with featured post, categories and search |
 | `blog/<slug>.html` | One file per article (`/blog/<slug>`) |
 | `blog/_template.html` | Copy this to start a new article (it is not published) |
+| `privacy.html` | Privacy notice (`/privacy`), linked from the footer and the contact form |
 | `404.html` | "Page not found" page |
-| `assets/css/style.css` | All styles. Colours, fonts and spacing are variables at the top (section 2) |
-| `assets/js/main.js` | Menu, animations, contact form, blog search |
+| `assets/css/style.css` | All styles, in 18 numbered sections listed at the top of the file. Colours, fonts and spacing are variables in section 2 |
+| `assets/js/main.js` | Menu, back-to-top button, scroll reveal, contact form, blog search, card spotlight, typewriter, 3D tilt (9 numbered sections) |
 | `assets/js/hero-vision.js` | The animated camera illustration on the home page |
 | `assets/images/` | Images (WebP), icons (`icons.svg`), logo and favicons |
 | `tools/partials/` | The shared header, footer and blog-post layout |
@@ -36,6 +34,14 @@ Plain HTML, CSS and JavaScript. No framework and no build step: Vercel publishes
 **Header and footer:** they are identical on every page. Edit `tools/partials/header.html` or `tools/partials/footer.html`, then run `python3 tools/update_site.py` to copy the change into every page. (If you can't run Python, edit the same block in every `.html` file — it sits between `<!-- @header -->` and `<!-- /@header -->`.)
 
 **Honesty rule:** only publish numbers, clients and results we can prove. See `CHANGES.md`.
+
+**Common edits on the home page (`index.html`):**
+- *Typewriter phrases*: the `data-typewriter='[...]'` list on the `typeline` line in the hero (About has its own).
+- *Moving lines*: the two `marquee-row` lists below the hero. The top row moves left and the bottom row moves right; keep each list duplicated once (the copy has `aria-hidden="true"`) so the loop is seamless.
+- *Core values*: the "Our core values" section. Keep it in step with the values on `about.html`.
+- *FAQ*: each question is a `<details class="faq-item">`. If you change a question, update the matching entry in the `FAQPage` JSON-LD at the top of the file.
+
+**3D hero visuals:** inner pages have a 3D visual on the right of the hero (`hero-visual`, `stack3d` layers, the About `id-card` and the Contact `next-card`). Any element with `data-tilt` leans towards the mouse; this is switched off for visitors who prefer reduced motion.
 
 **Colours and fonts:** change the variables at the top of `assets/css/style.css` (for example `--accent`). Everything else follows.
 
@@ -80,4 +86,3 @@ You need Python 3 (already installed on macOS and Linux; on Windows install it f
 ## Run it locally
 
 Any static server works, e.g. `npx serve .` then open <http://localhost:3000>. Note: clean URLs such as `/about` need a server that maps them to `about.html` (`npx serve` does this).
->>>>>>> 672fe72618b5858a3cb79c0f734dfdbda9892d68
