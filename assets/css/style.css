@@ -77,7 +77,7 @@
   --space-7: 3rem;
   --space-8: 4rem;
   --space-9: 6rem;
-  --section-y: clamp(4.5rem, 3rem + 6vw, 8rem);
+  --section-y: clamp(4rem, 2.5rem + 4.5vw, 6.5rem);
   --gutter: clamp(1rem, 0.5rem + 2.5vw, 2rem);
   --container: 1200px;
   --container-narrow: 760px;
@@ -699,7 +699,8 @@ strong { font-weight: 600; color: var(--text); }
 }
 .tilt-inner { transform-style: preserve-3d; transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform 0.5s var(--ease); will-change: transform; }
 .is-tilting .tilt-inner { transition: transform 0.12s linear; }
-.vision-panel.tilt-inner, .device-art.tilt-inner { transform-origin: center; }
+.vision-panel.tilt-inner, .device-art.tilt-inner { width: 100%; transform-origin: center; }
+.hero-visual:has(> .vision-panel) { min-height: 0; perspective: 1600px; }
 
 /* Isometric stack of glass layers */
 .stack3d { position: relative; width: 320px; height: 420px; transform-style: preserve-3d; transform: rotateX(56deg) rotateZ(-38deg) translateZ(-110px); }
@@ -870,7 +871,7 @@ strong { font-weight: 600; color: var(--text); }
 .featured-post:hover { box-shadow: 0 24px 60px -24px rgba(46, 230, 200, 0.4); }
 .card .icon-badge { transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease), background 0.4s; }
 .card:hover .icon-badge { transform: translateY(-2px) rotate(-6deg) scale(1.06); background: linear-gradient(160deg, rgba(46, 230, 200, 0.3), rgba(59, 184, 255, 0.12)); box-shadow: 0 0 24px -4px rgba(46, 230, 200, 0.6); }
-.step:hover::before { color: var(--accent-2); }
+.step:hover > h3::before { color: var(--accent-2); }
 .fact { transition: transform var(--dur) var(--ease), border-color var(--dur), box-shadow var(--dur); }
 .fact:hover { transform: translateY(-3px); border-color: var(--accent-line); box-shadow: 0 16px 40px -20px rgba(46, 230, 200, 0.5); }
 .principle { transition: border-color var(--dur), transform var(--dur) var(--ease); }
@@ -882,7 +883,7 @@ strong { font-weight: 600; color: var(--text); }
 /* 11. SECTIONS: steps, CTA, services, stack, marquee, FAQ ------------- */
 .steps { counter-reset: step; list-style: none; padding: 0; display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); }
 .step { counter-increment: step; }
-.step::before {
+.step > h3::before {
   content: counter(step, decimal-leading-zero);
   display: block;
   margin-bottom: var(--space-4);
@@ -1349,7 +1350,8 @@ strong { font-weight: 600; color: var(--text); }
 .prev-next .next .label { justify-content: flex-end; }
 
 /* Compact hero for text pages such as the privacy notice */
-.page-hero.page-hero--compact { min-height: 0; }
+.page-hero.page-hero--compact { min-height: 0; padding-bottom: var(--space-5); }
+.container.prose { max-width: calc(var(--container-narrow) + var(--gutter) * 2); }
 .footer-bottom a { color: var(--text-muted); }
 .footer-bottom a:hover { color: var(--accent); }
 .form-footer small a { color: var(--accent); }

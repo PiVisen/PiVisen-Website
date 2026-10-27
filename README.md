@@ -33,6 +33,8 @@ Plain HTML, CSS and JavaScript. No framework and no build step: Vercel publishes
 
 **Header and footer:** they are identical on every page. Edit `tools/partials/header.html` or `tools/partials/footer.html`, then run `python3 tools/update_site.py` to copy the change into every page. (If you can't run Python, edit the same block in every `.html` file — it sits between `<!-- @header -->` and `<!-- /@header -->`.)
 
+**After changing CSS, JS or icons, always run `python3 tools/update_site.py`.** It adds a new version number (`?v=...`) to the `style.css`, `main.js`, `hero-vision.js` and `icons.svg` links on every page. Without it, visitors' browsers may keep showing the old design.
+
 **Honesty rule:** only publish numbers, clients and results we can prove. See `CHANGES.md`.
 
 **Common edits on the home page (`index.html`):**

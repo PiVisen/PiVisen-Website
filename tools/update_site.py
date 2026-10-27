@@ -14,11 +14,16 @@ copy-and-paste work when you change shared parts or add a blog post:
      (SEO tags, JSON-LD, contents list, related posts, previous/next).
   3. Rebuilds the post list on blog.html, the "Latest articles" on the home
      page, feed.xml (RSS) and sitemap.xml.
+  4. Adds a version (?v=...) to style.css, main.js, hero-vision.js and
+     icons.svg links, so visitors always get the latest files after a change.
+
+Run it after every change to CSS, JS or icons, not only for blog posts.
 
 Run it from the repository root:
     python3 tools/update_site.py
 """
 import datetime as dt
+import hashlib
 import html
 import json
 import re
@@ -87,6 +92,8 @@ def read(path):
 
 
 def write_if_changed(path, text):
+    if path.suffix == ".html":
+        text = apply_versions(text)
     if not path.exists() or read(path) != text:
         path.write_text(text, encoding="utf-8")
         print("  updated", path.relative_to(ROOT))
@@ -125,6 +132,28 @@ def slugify(text):
     text = re.sub(r"<[^>]+>", "", text).lower()
     text = re.sub(r"[^a-z0-9]+", "-", text).strip("-")
     return text or "section"
+
+
+# --------------------------------------------------------------------------
+# 0. Cache busting: add ?v=<content hash> to CSS, JS and the icon sprite so
+#    browsers always load the new file after a change.
+# --------------------------------------------------------------------------
+VERSIONED = ["assets/css/style.css", "assets/js/main.js", "assets/js/hero-vision.js", "assets/images/icons.svg"]
+
+
+def asset_versions():
+    out = {}
+    for rel in VERSIONED:
+        f = ROOT / rel
+        if f.exists():
+            out["/" + rel] = hashlib.sha1(f.read_bytes()).hexdigest()[:10]
+    return out
+
+
+def apply_versions(text):
+    for path, ver in asset_versions().items():
+        text = re.sub(re.escape(path) + r"(\?v=[0-9a-f]+)?", path + "?v=" + ver, text)
+    return text
 
 
 # --------------------------------------------------------------------------
@@ -462,7 +491,8 @@ def main():
             continue
         text = read(f)
         if "<!-- @header" in text:
-            write_if_changed(f, apply_partials(f, text))
+            text = apply_partials(f, text)
+        write_if_changed(f, text)
 
     if errors:
         print("\nPlease fix:")
