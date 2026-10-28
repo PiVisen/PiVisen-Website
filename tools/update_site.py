@@ -14,8 +14,9 @@ copy-and-paste work when you change shared parts or add a blog post:
      (SEO tags, JSON-LD, contents list, related posts, previous/next).
   3. Rebuilds the post list on blog.html, the "Latest articles" on the home
      page, feed.xml (RSS) and sitemap.xml.
-  4. Adds a version (?v=...) to style.css, main.js, hero-vision.js and
-     icons.svg links, so visitors always get the latest files after a change.
+  4. Adds a version (?v=...) to style.css, main.js, hero-vision.js,
+     icons.svg and the service and blog cover image links, so visitors
+     always get the latest files after a change.
 
 Run it after every change to CSS, JS or icons, not only for blog posts.
 
@@ -51,7 +52,7 @@ AUTHORS = {
     "PiVisen AI Team": {
         "type": "Organization",
         "image": "/assets/images/logo-mark.webp",
-        "bio": "PiVisen AI is a technology start-up from Islamabad, Pakistan. We build AI products and software for businesses, including computer vision, edge AI and cloud AI systems.",
+        "bio": "PiVisen AI is a technology start-up from Bahawalpur, Pakistan. We build AI products and software for businesses, including computer vision, edge AI and cloud AI systems.",
         "link": "/about",
         "link_text": "Meet the team",
     },
@@ -135,25 +136,32 @@ def slugify(text):
 
 
 # --------------------------------------------------------------------------
-# 0. Cache busting: add ?v=<content hash> to CSS, JS and the icon sprite so
-#    browsers always load the new file after a change.
+# 0. Cache busting: add ?v=<content hash> to CSS, JS, the icon sprite and
+#    the content images so browsers always load the new file after a change.
 # --------------------------------------------------------------------------
 VERSIONED = ["assets/css/style.css", "assets/js/main.js", "assets/js/hero-vision.js", "assets/images/icons.svg"]
+VERSIONED_IMAGES = ["assets/images/svc-*.webp", "assets/images/blog/cover-*.webp"]
+POST_DATA = re.compile(r'(<script type="application/json" id="post-data">.*?</script>)', re.S)
 
 
 def asset_versions():
+    files = [ROOT / rel for rel in VERSIONED]
+    files += [f for pattern in VERSIONED_IMAGES for f in sorted(ROOT.glob(pattern))]
     out = {}
-    for rel in VERSIONED:
-        f = ROOT / rel
+    for f in files:
         if f.exists():
-            out["/" + rel] = hashlib.sha1(f.read_bytes()).hexdigest()[:10]
+            out["/" + f.relative_to(ROOT).as_posix()] = hashlib.sha1(f.read_bytes()).hexdigest()[:10]
     return out
 
 
 def apply_versions(text):
-    for path, ver in asset_versions().items():
-        text = re.sub(re.escape(path) + r"(\?v=[0-9a-f]+)?", path + "?v=" + ver, text)
-    return text
+    # The post-data block keeps plain paths: it is the source the posts are built from.
+    parts = POST_DATA.split(text)
+    versions = asset_versions()
+    for i in range(0, len(parts), 2):
+        for path, ver in versions.items():
+            parts[i] = re.sub(re.escape(path) + r"(\?v=[0-9a-f]+)?", path + "?v=" + ver, parts[i])
+    return "".join(parts)
 
 
 # --------------------------------------------------------------------------
