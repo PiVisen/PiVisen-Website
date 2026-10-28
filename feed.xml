@@ -20,7 +20,7 @@
       <category>Security</category>
       <dc:creator>PiVisen AI Team</dc:creator>
       <description>What happens between a camera seeing something and your phone buzzing, in plain English, and what to ask before you buy an AI camera for your shop.</description>
-      <enclosure url="https://pivisen.com/assets/images/blog/cover-ai-camera-alerts.webp" type="image/webp" length="92068" />
+      <enclosure url="https://pivisen.com/assets/images/blog/cover-ai-camera-alerts.webp" type="image/webp" length="103366" />
     </item>
     <item>
       <title>Edge AI vs cloud AI: when to use which</title>
@@ -30,7 +30,7 @@
       <category>Edge AI</category>
       <dc:creator>PiVisen AI Team</dc:creator>
       <description>Should your AI run on a small device on site or on servers in the cloud? A practical comparison of speed, cost, privacy and upkeep, with a simple guide.</description>
-      <enclosure url="https://pivisen.com/assets/images/blog/cover-edge-vs-cloud.webp" type="image/webp" length="102512" />
+      <enclosure url="https://pivisen.com/assets/images/blog/cover-edge-vs-cloud.webp" type="image/webp" length="114728" />
     </item>
     <item>
       <title>Why false alarms matter in AI security, and how to reduce them</title>
@@ -40,7 +40,7 @@
       <category>AI</category>
       <dc:creator>PiVisen AI Team</dc:creator>
       <description>False alarms teach people to ignore alerts. Here is why AI security systems raise them, and seven practical ways to cut them down.</description>
-      <enclosure url="https://pivisen.com/assets/images/blog/cover-false-alarms.webp" type="image/webp" length="82670" />
+      <enclosure url="https://pivisen.com/assets/images/blog/cover-false-alarms.webp" type="image/webp" length="91998" />
     </item>
     <item>
       <title>What is computer vision? A plain guide for business owners</title>
@@ -50,7 +50,7 @@
       <category>Computer Vision</category>
       <dc:creator>PiVisen AI Team</dc:creator>
       <description>Computer vision lets software understand images and video. Here is how it works, what it can do for a business, where it struggles and how to start small.</description>
-      <enclosure url="https://pivisen.com/assets/images/blog/cover-computer-vision.webp" type="image/webp" length="101782" />
+      <enclosure url="https://pivisen.com/assets/images/blog/cover-computer-vision.webp" type="image/webp" length="114634" />
     </item>
     <item>
       <title>Building an AI product from idea to prototype: the PiLENS story</title>
@@ -60,7 +60,7 @@
       <category>Company News</category>
       <dc:creator>PiVisen AI Team</dc:creator>
       <description>How we approached PiLENS, our first product: the problem, the limits we set ourselves, how the system works and the numbers we measured in our tests.</description>
-      <enclosure url="https://pivisen.com/assets/images/blog/cover-pilens-story.webp" type="image/webp" length="76120" />
+      <enclosure url="https://pivisen.com/assets/images/blog/cover-pilens-story.webp" type="image/webp" length="75466" />
     </item>
   </channel>
 </rss>

@@ -965,14 +965,13 @@ strong { font-weight: 600; color: var(--text); }
 .marquee-row { overflow: hidden; padding-block: var(--space-4); }
 .marquee-row + .marquee-row { border-top: 1px solid var(--border-strong); }
 .marquee-track { display: flex; width: max-content; animation: marquee-left 42s linear infinite; }
-.marquee-row--reverse .marquee-track { animation-name: marquee-right; animation-duration: 48s; }
+/* Same speed (about 40px/s) on both rows: duration scales with each row's list width (1663px → 42s, 2249px → 56.8s). */
+.marquee-row--reverse .marquee-track { animation-name: marquee-right; animation-duration: 56.8s; }
 .marquee:hover .marquee-track { animation-play-state: paused; }
 .marquee-track ul { display: flex; gap: var(--space-7); padding: 0 var(--space-7) 0 0; list-style: none; }
 .marquee-track li { display: inline-flex; align-items: center; gap: var(--space-3); font-family: var(--font-display); font-size: var(--fs-md); font-weight: 500; color: var(--text-dim); white-space: nowrap; transition: color var(--dur); }
-.marquee-row--reverse li { font-family: var(--font-mono); font-size: var(--fs-sm); letter-spacing: 0.04em; text-transform: uppercase; }
 .marquee-track li:hover { color: var(--text); }
-.marquee-track li::before { content: ""; width: 7px; height: 7px; border-radius: 2px; background: var(--gradient); transform: rotate(45deg); }
-.marquee-row--reverse li::before { border-radius: 50%; background: var(--accent-2); box-shadow: 0 0 8px var(--accent-2); transform: none; }
+.marquee-track li::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--accent-2); box-shadow: 0 0 8px var(--accent-2); }
 @keyframes marquee-left { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @keyframes marquee-right { from { transform: translateX(-50%); } to { transform: translateX(0); } }
 @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
