@@ -214,7 +214,7 @@
         })
         .catch(function (err) {
           if (window.console) console.warn("Contact form could not be sent:", err);
-          showStatus("error", "Sorry, your message could not be sent. Please email us at info@pivisen.com or call +92 302 0022779.");
+          showStatus("error", "Sorry, your message could not be sent. Please email us at info@pivisen.com.");
         })
         .finally(function () {
           submitBtn.disabled = false;
