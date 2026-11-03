@@ -73,7 +73,7 @@ AUTHORS = {
     "Manaheel Hashim": {
         "type": "Person",
         "image": "/assets/images/team-manaheel-hashim.webp",
-        "bio": "Co-Founder & CRO of PiVisen AI. Python developer focused on automation pipelines and data processing.",
+        "bio": "Co-Founder & CRO of PiVisen AI. Works on AI research and development, from testing new models to building prototypes.",
         "link": "https://www.linkedin.com/in/manaheel-hashim-319425422/",
         "link_text": "Manaheel on LinkedIn",
     },
