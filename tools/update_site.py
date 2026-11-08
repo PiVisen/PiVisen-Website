@@ -70,7 +70,7 @@ AUTHORS = {
     "M Tauqeer Zafar": {
         "type": "Person",
         "image": "/assets/images/team-tauqeer-zafar.webp",
-        "bio": "Co-Founder & CTO of PiVisen AI. Python and full-stack engineer who leads cloud and backend systems.",
+        "bio": "CTO of PiVisen AI. Python and full-stack engineer who leads cloud and backend systems.",
         "link": "https://www.linkedin.com/in/tauqeerzafar10/",
         "link_text": "Tauqeer on LinkedIn",
     },
