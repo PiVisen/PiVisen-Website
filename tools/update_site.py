@@ -17,12 +17,16 @@ copy-and-paste work when you change shared parts or add a blog post:
   4. Adds a version (?v=...) to style.css, main.js, hero-vision.js,
      icons.svg and the service and blog cover image links, so visitors
      always get the latest files after a change.
+  5. Checks every page against the Content-Security-Policy in vercel.json:
+     an inline <script> must have its hash listed there, and inline
+     style="..." attributes are not allowed (the browser would block them).
 
 Run it after every change to CSS, JS or icons, not only for blog posts.
 
 Run it from the repository root:
     python3 tools/update_site.py
 """
+import base64
 import datetime as dt
 import hashlib
 import html
@@ -481,6 +485,34 @@ def build_sitemap(posts):
     write_if_changed(ROOT / "sitemap.xml", sitemap)
 
 
+# --------------------------------------------------------------------------
+# 4. Content Security Policy: the browser blocks inline code that vercel.json
+#    does not allow, so catch it here before it reaches the live site.
+# --------------------------------------------------------------------------
+INLINE_SCRIPT = re.compile(r"<script(?![^>]*\bsrc=)([^>]*)>(.*?)</script>", re.S)
+
+
+def check_csp():
+    csp = ""
+    for rule in json.loads(read(ROOT / "vercel.json")).get("headers", []):
+        for header in rule["headers"]:
+            if header["key"] == "Content-Security-Policy":
+                csp = header["value"]
+    for f in sorted(ROOT.glob("*.html")) + sorted(BLOG_DIR.glob("*.html")):
+        rel = f.relative_to(ROOT)
+        text = read(f)
+        for attrs, code in INLINE_SCRIPT.findall(text):
+            if "application/ld+json" in attrs or "application/json" in attrs:
+                continue  # data blocks, never run
+            digest = base64.b64encode(hashlib.sha256(code.encode("utf-8")).digest()).decode()
+            if "'sha256-%s'" % digest not in csp:
+                errors.append("%s: an inline <script> is not allowed by the Content-Security-Policy in vercel.json. "
+                              "Move it into a .js file, or add 'sha256-%s' to script-src." % (rel, digest))
+        if re.search(r'\sstyle="', text):
+            errors.append('%s: inline style="..." attributes are blocked by the Content-Security-Policy. '
+                          "Use a CSS class instead." % rel)
+
+
 def main():
     print("PiVisen AI site helper")
     posts = [p for p in (load_post(f) for f in sorted(BLOG_DIR.glob("*.html"))) if p]
@@ -501,6 +533,8 @@ def main():
         if "<!-- @header" in text:
             text = apply_partials(f, text)
         write_if_changed(f, text)
+
+    check_csp()
 
     if errors:
         print("\nPlease fix:")

@@ -21,7 +21,7 @@ Plain HTML, CSS and JavaScript. No framework and no build step: Vercel publishes
 | `tools/partials/` | The shared header, footer and blog-post layout |
 | `tools/update_site.py` | Helper that copies the header/footer into every page and rebuilds the blog lists, `feed.xml` and `sitemap.xml` |
 | `sitemap.xml`, `feed.xml`, `robots.txt`, `site.webmanifest` | SEO files (sitemap and feed are generated) |
-| `vercel.json` | Clean URLs, cache headers, `/products` → `/projects` redirect |
+| `vercel.json` | Clean URLs, cache and security headers, `/products` → `/projects` redirect |
 | `AUDIT.md`, `CHANGES.md` | Review of the old site and the list of removed claims |
 
 ## How to edit text
@@ -84,6 +84,15 @@ You need Python 3 (already installed on macOS and Linux; on Windows install it f
 
    It builds the full page (SEO tags, structured data, share buttons, related posts, previous/next) and updates `blog.html`, the home page's latest articles, `feed.xml` and `sitemap.xml`. It tells you if a field is missing or a title/summary is too long.
 6. **Commit and open a pull request.** Check the Vercel preview, then merge.
+
+## Security headers
+
+`vercel.json` sends a strict Content-Security-Policy and other security headers with every page. The browser only runs scripts, styles, fonts and images from pivisen.com itself, and the contact form may only send to EmailJS. Two rules follow from that:
+
+- **No inline `style="..."` attributes.** The browser ignores them. Add a class in `style.css` instead.
+- **No new inline `<script>` code.** Put it in a `.js` file under `assets/js/`. The one inline line in each page's `<head>` is allowed by its hash.
+
+`python3 tools/update_site.py` checks every page for both and tells you what to fix. If you add something from another site (a video, a map, a chat widget or analytics), its address must be added to the policy in `vercel.json`, or the browser will block it.
 
 ## Run it locally
 
