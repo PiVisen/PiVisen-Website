@@ -1046,6 +1046,7 @@ strong { font-weight: 600; color: var(--text); }
 /* 13. TEAM ------------------------------------------------------------ */
 @property --angle { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
 .team-grid { display: grid; gap: var(--space-5); grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr)); }
+@media (min-width: 900px) { .team-grid--lead { grid-template-columns: repeat(3, minmax(0, 1fr)); } .team-card--lead { grid-column: 2; } .team-card--lead + .team-card { grid-column: 1; } }
 .team-card {
   --angle: 0deg;
   position: relative;
