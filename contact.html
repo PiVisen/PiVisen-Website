@@ -28,9 +28,10 @@
     <link rel="preload" href="/assets/fonts/space-grotesk-var-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/assets/fonts/inter-var-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preconnect" href="https://api.emailjs.com" crossorigin />
-    <link rel="stylesheet" href="/assets/css/style.css?v=c581ae9c77" />
+    <link rel="stylesheet" href="/assets/css/style.css?v=21e072f970" />
     <script>document.documentElement.classList.add("js");</script>
-    <script src="/assets/js/main.js?v=1ed2a58318" defer></script>
+    <script src="/assets/js/main.js?v=362484ffc0" defer></script>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -178,6 +179,7 @@
                 <input id="cf-website" name="website" type="text" tabindex="-1" autocomplete="off" />
               </div>
             </div>
+            <div class="cf-turnstile form-check" data-sitekey="__TURNSTILE_SITE_KEY__" data-action="contact" data-theme="dark" data-size="flexible"></div>
             <div class="form-footer">
               <button class="btn btn-primary btn-lg" type="submit">Send message</button>
               <small>We only use your details to reply to you. See our <a href="/privacy">privacy notice</a>.</small>
