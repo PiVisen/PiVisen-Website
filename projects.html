@@ -28,9 +28,10 @@
     <link rel="preload" href="/assets/fonts/space-grotesk-var-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/assets/fonts/inter-var-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/assets/images/pilens-device.svg" as="image" type="image/svg+xml" fetchpriority="high" />
-    <link rel="stylesheet" href="/assets/css/style.css?v=c581ae9c77" />
+    <link rel="stylesheet" href="/assets/css/style.css?v=21e072f970" />
     <script>document.documentElement.classList.add("js");</script>
-    <script src="/assets/js/main.js?v=1ed2a58318" defer></script>
+    <script src="/assets/js/main.js?v=362484ffc0" defer></script>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -166,6 +167,74 @@
             <p class="fact"><svg class="icon" aria-hidden="true"><use href="/assets/images/icons.svg?v=e8166be494#clock"></use></svg><span>Ran 2 hours live at 30 frames per second without dropping a frame.</span></p>
             <p class="fact"><svg class="icon" aria-hidden="true"><use href="/assets/images/icons.svg?v=e8166be494#shield"></use></svg><span>A second AI check cut false alerts on normal test videos from 16.4% to 3.6%.</span></p>
           </div>
+        </div>
+      </section>
+
+      <section class="section section-alt" id="demo" aria-labelledby="demo-title">
+        <div class="container">
+          <div class="section-head reveal">
+            <p class="eyebrow">Request a demo</p>
+            <h2 id="demo-title">See PiLENS at your site</h2>
+            <p>Tell us a little about the place you want to protect. We will contact you to arrange a demo.</p>
+          </div>
+          <form class="card form-card demo-form" id="demo-form" novalidate aria-labelledby="demo-title">
+            <p>Fields marked optional can be left empty.</p>
+            <div class="form-grid">
+              <div class="field">
+                <label for="df-name">Your name</label>
+                <input id="df-name" name="name" type="text" autocomplete="name" required maxlength="100" aria-describedby="df-name-error" />
+                <p class="field-error" id="df-name-error"></p>
+              </div>
+              <div class="field">
+                <label for="df-email">Email address</label>
+                <input id="df-email" name="email" type="email" autocomplete="email" inputmode="email" required maxlength="254" aria-describedby="df-email-error" />
+                <p class="field-error" id="df-email-error"></p>
+              </div>
+              <div class="field">
+                <label for="df-phone">Phone <span class="optional">(optional)</span></label>
+                <input id="df-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="30" placeholder="+92 300 1234567" aria-describedby="df-phone-error" />
+                <p class="field-error" id="df-phone-error"></p>
+              </div>
+              <div class="field">
+                <label for="df-organisation">Business or organisation <span class="optional">(optional)</span></label>
+                <input id="df-organisation" name="organisation" type="text" autocomplete="organization" maxlength="100" />
+              </div>
+              <div class="field">
+                <label for="df-site">Type of site</label>
+                <select id="df-site" name="site_type" required aria-describedby="df-site-error">
+                  <option value="">Choose one</option>
+                  <option value="shop">Shop</option>
+                  <option value="pharmacy">Pharmacy</option>
+                  <option value="office">Office</option>
+                  <option value="home">Home</option>
+                  <option value="warehouse">Warehouse or godown</option>
+                  <option value="school">School</option>
+                  <option value="factory">Factory</option>
+                  <option value="other">Something else</option>
+                </select>
+                <p class="field-error" id="df-site-error"></p>
+              </div>
+              <div class="field">
+                <label for="df-cameras">Number of cameras <span class="optional">(optional)</span></label>
+                <input id="df-cameras" name="cameras" type="number" inputmode="numeric" min="1" max="1000" step="1" aria-describedby="df-cameras-error" />
+                <p class="field-error" id="df-cameras-error"></p>
+              </div>
+              <div class="field full">
+                <label for="df-message">Anything we should know? <span class="optional">(optional)</span></label>
+                <textarea id="df-message" name="message" rows="4" maxlength="2000" placeholder="For example: what you want to watch, and when."></textarea>
+              </div>
+              <div class="hp-field" aria-hidden="true">
+                <label for="df-website">Leave this field empty</label>
+                <input id="df-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+              </div>
+            </div>
+            <div class="cf-turnstile form-check" data-sitekey="0x4AAAAAAGT0FWfCQPOMeuVR" data-action="pilens_demo" data-theme="dark" data-size="flexible"></div>
+            <div class="form-footer">
+              <button class="btn btn-primary btn-lg" type="submit">Request a demo</button>
+              <small>We only use your details to arrange the demo. See our <a href="/privacy">privacy notice</a>.</small>
+            </div>
+            <p class="form-status" role="status" aria-live="polite"></p>
+          </form>
         </div>
       </section>
 

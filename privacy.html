@@ -27,9 +27,9 @@
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="preload" href="/assets/fonts/space-grotesk-var-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/assets/fonts/inter-var-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/assets/css/style.css?v=c581ae9c77" />
+    <link rel="stylesheet" href="/assets/css/style.css?v=21e072f970" />
     <script>document.documentElement.classList.add("js");</script>
-    <script src="/assets/js/main.js?v=1ed2a58318" defer></script>
+    <script src="/assets/js/main.js?v=362484ffc0" defer></script>
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -77,7 +77,7 @@
           </nav>
           <p class="eyebrow">Privacy</p>
           <h1 id="page-title">Privacy notice</h1>
-          <p class="lead">Privacy is one of our core values, so this page is short and in plain English. Last updated: 27 October 2026.</p>
+          <p class="lead">Privacy is one of our core values, so this page is short and in plain English. Last updated: 26 November 2026.</p>
         </div>
       </section>
 
@@ -89,24 +89,31 @@
           <h2 id="what-we-collect">What we collect</h2>
           <p>We only collect what you choose to send us:</p>
           <ul>
-            <li><strong>Contact form:</strong> your name, email address, company (optional), the topic you pick and your message. We also receive the address of the page you sent it from.</li>
-            <li><strong>Email and phone:</strong> whatever you include when you write to us or call us directly.</li>
+            <li><strong>Contact form:</strong> your name, email address, company (optional), the topic you pick and your message, and the time it arrived.</li>
+            <li><strong>PiLENS demo request</strong> (on the Products page): your name, email address, phone number (optional), business or organisation (optional), the type of site, the number of cameras (optional) and your message (optional), and the time it arrived.</li>
+            <li><strong>Email:</strong> whatever you include when you write to us directly.</li>
           </ul>
+          <p>We do not store your IP address with your message. To stop spam, our server counts how many messages arrive from one IP address and one email address in an hour; it keeps those counts only in memory, scrambled so the addresses can't be read back, and forgets them within the hour.</p>
 
           <h2 id="how-it-is-sent">How your message reaches us</h2>
-          <p>The contact form sends your message through EmailJS, an email delivery service, to our company inbox. EmailJS handles the message only to deliver it to us.</p>
+          <p>Both forms send your details to our own server, which stores them in our database and emails them to our company inbox. Our server and database run in Singapore, at Render and Neon. We send that email, and a short confirmation to you, through Resend, an email delivery service; the confirmation repeats nothing you typed. If our server can't be reached, the form sends your message through EmailJS, another email delivery service, straight to our inbox instead.</p>
+          <p>Before a form is sent, Cloudflare Turnstile checks that a person, not a program, is sending it. To do that, Cloudflare sees your IP address and some information about your browser, as described in Cloudflare's own privacy policy. It does not set advertising or tracking cookies.</p>
 
           <h2 id="how-we-use-it">How we use it</h2>
-          <p>We use your details to read your message, reply to you and, if you want, discuss your project. We do not sell your details, and we do not add you to a mailing list.</p>
+          <p>We use your details to read your message, reply to you and, if you want, discuss your project or arrange a PiLENS demo. We do not sell your details, and we do not add you to a mailing list.</p>
 
           <h2 id="cookies">Cookies and tracking</h2>
-          <p>This website does not use analytics, advertising or tracking cookies. Our fonts are stored on our own server, so loading the site does not contact Google Fonts. Like any website host, our hosting provider (Vercel) may record basic technical information, such as IP addresses, in server logs so it can deliver and protect the site.</p>
+          <p>This website does not use analytics, advertising or tracking cookies. Our fonts are stored on our own server, so loading the site does not contact Google Fonts. Like any website host, our hosting provider (Vercel) may record basic technical information, such as IP addresses, in server logs so it can deliver and protect the site. If our server has an error, a report goes to Sentry, an error-monitoring service; it says where in our code the error happened and never includes what you sent, your IP address or anything else about you.</p>
 
           <h2 id="how-long">How long we keep it</h2>
-          <p>We keep messages for as long as we need them to talk with you and for our normal business records.</p>
+          <ul>
+            <li><strong>Messages and demo requests:</strong> 24 months after our last reply or contact with you (or after they arrive, if we never got in touch), then deleted automatically.</li>
+            <li><strong>Spam:</strong> 30 days.</li>
+            <li><strong>Backups:</strong> a copy of our database is made every night, encrypted so only we can read it, stored with Cloudflare, and deleted after 30 days.</li>
+          </ul>
 
           <h2 id="your-choices">Your choices</h2>
-          <p>You can ask us for a copy of the details we hold about you, or ask us to delete them, by emailing <a href="mailto:info@pivisen.com">info@pivisen.com</a>.</p>
+          <p>You can ask us for a copy of the details we hold about you, ask us to correct them, or ask us to delete them, by emailing <a href="mailto:info@pivisen.com">info@pivisen.com</a>. We aim to answer within 30 days.</p>
 
           <h2 id="changes">Changes to this notice</h2>
           <p>If we change how we handle your details, we will update this page and the date at the top.</p>

@@ -103,11 +103,16 @@
   var year = document.getElementById("year");
   if (year) year.textContent = new Date().getFullYear();
 
-  /* 4. CONTACT FORM (EmailJS) -----------------------------------------
-     Same EmailJS account as before: service, template and public key are
-     unchanged. We call the EmailJS REST endpoint directly, so no extra
-     script has to load. Each form field is sent as its own template
-     variable: {{name}}, {{email}}, {{company}}, {{subject}}, {{message}}. */
+  /* 4. FORMS: CONTACT AND PILENS DEMO ----------------------------------
+     Both forms send to the PiVisen API (api.pivisen.com), which saves the
+     message, emails the team and thanks the visitor. Cloudflare Turnstile
+     (the widget in each form) proves a person sent it. If the API can't be
+     reached in time (network trouble, a server problem), the form falls back
+     to EmailJS, as before, so a message is never lost. EmailJS gets each
+     field as its own template variable: {{name}}, {{email}}, {{company}},
+     {{subject}}, {{message}}. */
+  var API_BASE = "https://api.pivisen.com";
+  var API_TIMEOUT_MS = 10000;
   var EMAILJS = {
     serviceId: "service_ll6ox79",
     templateId: "template_bc0wtu9",
@@ -115,26 +120,57 @@
     endpoint: "https://api.emailjs.com/api/v1.0/email/send"
   };
 
-  var form = document.getElementById("contact-form");
-  if (form) {
+  // Resolves to { saved: true } once the API has the message, { problem: "..." }
+  // when the API refused it (to show to the visitor), or { fallback: true } when
+  // the API couldn't be reached and EmailJS should try.
+  function sendToApi(path, payload) {
+    var controller = window.AbortController ? new AbortController() : null;
+    var timer = controller ? window.setTimeout(function () { controller.abort(); }, API_TIMEOUT_MS) : null;
+    return fetch(API_BASE + path, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+      signal: controller ? controller.signal : undefined
+    })
+      .then(function (res) {
+        if (res.ok) return { saved: true };
+        if (res.status >= 500) return { fallback: true };
+        return res.json().then(
+          function (body) {
+            var error = body && body.error;
+            if (res.status === 422) return { problem: "Please check the fields and try again." };
+            return { problem: (error && error.message) || "Sorry, your message could not be sent." };
+          },
+          function () { return { problem: "Sorry, your message could not be sent." }; }
+        );
+      })
+      .catch(function () { return { fallback: true }; })
+      .finally(function () { if (timer) window.clearTimeout(timer); });
+  }
+
+  function sendToEmailJs(templateParams) {
+    return fetch(EMAILJS.endpoint, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        service_id: EMAILJS.serviceId,
+        template_id: EMAILJS.templateId,
+        user_id: EMAILJS.publicKey,
+        template_params: templateParams
+      })
+    }).then(function (res) {
+      if (!res.ok) return res.text().then(function (t) { throw new Error(res.status + " " + t); });
+    });
+  }
+
+  // Wires up one form: field checks as the visitor types, then the API, then
+  // EmailJS if the API can't be reached. `options` says what is checked, what
+  // the API and EmailJS get, and what to say once it is sent.
+  function setUpForm(form, options) {
     var statusBox = form.querySelector(".form-status");
     var submitBtn = form.querySelector('button[type="submit"]');
-
-    // Pre-select a subject from links such as /contact?topic=pilens#contact-form
-    var params = new URLSearchParams(window.location.search);
-    var topic = params.get("topic");
-    var subjectField = form.elements.subject;
-    if (topic && subjectField) {
-      var match = Array.prototype.find.call(subjectField.options, function (o) { return o.dataset.key === topic; });
-      if (match) subjectField.value = match.value;
-    }
-
-    var rules = {
-      name: function (v) { return v.trim().length >= 2 || "Please enter your name."; },
-      email: function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()) || "Please enter a valid email address."; },
-      subject: function (v) { return v !== "" || "Please choose what you need help with."; },
-      message: function (v) { return v.trim().length >= 20 || "Please tell us a little more (at least 20 characters)."; }
-    };
+    var widget = form.querySelector(".cf-turnstile");
+    var rules = options.rules;
 
     function validateField(field) {
       var rule = rules[field.name];
@@ -162,6 +198,11 @@
       statusBox.textContent = text;
     }
 
+    function resetCheck() {
+      // A Turnstile token works once: get a fresh one for the next try.
+      if (window.turnstile && widget) window.turnstile.reset(widget);
+    }
+
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       var firstInvalid = null;
@@ -174,52 +215,134 @@
         showStatus("error", "Please fix the highlighted fields.");
         return;
       }
-      if (form.elements.website && form.elements.website.value) return; // spam trap
 
-      var data = {
-        name: form.elements.name.value.trim(),
-        email: form.elements.email.value.trim(),
-        company: form.elements.company ? form.elements.company.value.trim() : "",
-        subject: form.elements.subject.value,
-        message: form.elements.message.value.trim()
-      };
-      // Each field goes to EmailJS as its own template variable; the message is sent exactly as typed.
-      var templateParams = {
-        name: data.name,
-        email: data.email,
-        company: data.company,
-        subject: data.subject,
-        message: data.message
-      };
+      var tokenField = form.elements["cf-turnstile-response"];
+      var payload = options.toApi(form);
+      payload.website = form.elements.website ? form.elements.website.value : "";
+      payload.turnstile_token = tokenField ? tokenField.value : "";
 
       submitBtn.disabled = true;
       submitBtn.dataset.label = submitBtn.dataset.label || submitBtn.textContent;
       submitBtn.textContent = "Sending…";
       statusBox.className = "form-status";
 
-      fetch(EMAILJS.endpoint, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          service_id: EMAILJS.serviceId,
-          template_id: EMAILJS.templateId,
-          user_id: EMAILJS.publicKey,
-          template_params: templateParams
+      sendToApi(options.path, payload)
+        .then(function (answer) {
+          if (answer.saved) return true;
+          if (answer.problem) {
+            showStatus("error", answer.problem);
+            return false;
+          }
+          if (payload.website) return true; // a bot: nothing to fall back to
+          return sendToEmailJs(options.toEmailJs(form)).then(function () { return true; });
         })
-      })
-        .then(function (res) {
-          if (!res.ok) return res.text().then(function (t) { throw new Error(res.status + " " + t); });
+        .then(function (sent) {
+          if (!sent) return;
+          var done = options.done(payload);
           form.reset();
-          showStatus("success", "Thank you, " + data.name + ". Your message has been sent. We will reply to " + data.email + ".");
+          showStatus("success", done);
         })
         .catch(function (err) {
-          if (window.console) console.warn("Contact form could not be sent:", err);
+          if (window.console) console.warn("The form could not be sent:", err);
           showStatus("error", "Sorry, your message could not be sent. Please email us at info@pivisen.com.");
         })
         .finally(function () {
+          resetCheck();
           submitBtn.disabled = false;
           submitBtn.textContent = submitBtn.dataset.label;
         });
+    });
+  }
+
+  function value(form, name) {
+    return form.elements[name] ? form.elements[name].value.trim() : "";
+  }
+  var nameRule = function (v) { return v.trim().length >= 2 || "Please enter your name."; };
+  var emailRule = function (v) { return /^[^\s@,;<>"]+@[^\s@,;<>"]+\.[^\s@,;<>"]{2,}$/.test(v.trim()) || "Please enter a valid email address."; };
+
+  var contactForm = document.getElementById("contact-form");
+  if (contactForm) {
+    // Pre-select a subject from links such as /contact?topic=pilens#contact-form
+    var topic = new URLSearchParams(window.location.search).get("topic");
+    var subjectField = contactForm.elements.subject;
+    if (topic && subjectField) {
+      var match = Array.prototype.find.call(subjectField.options, function (o) { return o.dataset.key === topic; });
+      if (match) subjectField.value = match.value;
+    }
+    setUpForm(contactForm, {
+      path: "/api/contact",
+      rules: {
+        name: nameRule,
+        email: emailRule,
+        subject: function (v) { return v !== "" || "Please choose what you need help with."; },
+        message: function (v) { return v.trim().length >= 20 || "Please tell us a little more (at least 20 characters)."; }
+      },
+      toApi: function (form) {
+        return {
+          name: value(form, "name"),
+          email: value(form, "email"),
+          company: value(form, "company"),
+          subject: form.elements.subject.value,
+          message: value(form, "message")
+        };
+      },
+      toEmailJs: function (form) {
+        return {
+          name: value(form, "name"),
+          email: value(form, "email"),
+          company: value(form, "company"),
+          subject: form.elements.subject.value,
+          message: value(form, "message")
+        };
+      },
+      done: function (sent) {
+        return "Thank you, " + sent.name + ". Your message has been sent. We will reply to " + sent.email + ".";
+      }
+    });
+  }
+
+  var demoForm = document.getElementById("demo-form");
+  if (demoForm) {
+    setUpForm(demoForm, {
+      path: "/api/pilens/request",
+      rules: {
+        name: nameRule,
+        email: emailRule,
+        phone: function (v) { return v.trim() === "" || /^\+?[0-9][0-9 ()-]{5,28}[0-9]$/.test(v.trim()) || "Please enter a phone number like +92 300 1234567."; },
+        site_type: function (v) { return v !== "" || "Please choose the kind of place."; },
+        cameras: function (v) { return v === "" || (/^[0-9]+$/.test(v) && +v >= 1 && +v <= 1000) || "Please enter a number from 1 to 1000."; }
+      },
+      toApi: function (form) {
+        var cameras = value(form, "cameras");
+        return {
+          name: value(form, "name"),
+          email: value(form, "email"),
+          phone: value(form, "phone"),
+          organisation: value(form, "organisation"),
+          site_type: form.elements.site_type.value,
+          cameras: cameras ? parseInt(cameras, 10) : null,
+          message: value(form, "message")
+        };
+      },
+      toEmailJs: function (form) {
+        var site = form.elements.site_type;
+        return {
+          name: value(form, "name"),
+          email: value(form, "email"),
+          company: value(form, "organisation"),
+          subject: "PiLENS demo request",
+          message: [
+            "Phone: " + (value(form, "phone") || "-"),
+            "Type of site: " + site.options[site.selectedIndex].text,
+            "Cameras: " + (value(form, "cameras") || "-"),
+            "",
+            value(form, "message") || "(no message)"
+          ].join("\n")
+        };
+      },
+      done: function (sent) {
+        return "Thank you, " + sent.name + ". We have your demo request and will contact you at " + sent.email + " to arrange it.";
+      }
     });
   }
 

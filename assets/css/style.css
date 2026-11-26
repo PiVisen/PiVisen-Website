@@ -1212,6 +1212,9 @@ strong { font-weight: 600; color: var(--text); }
 .field-error { display: none; margin-top: var(--space-2); color: var(--danger); font-size: var(--fs-xs); }
 .field [aria-invalid="true"] + .field-error { display: block; }
 .hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+/* Cloudflare Turnstile's check: room for it, so the form doesn't jump when it loads. */
+.form-check { margin-top: var(--space-5); min-height: 65px; }
+.demo-form { max-width: 820px; margin-inline: auto; }
 .form-footer { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-4); margin-top: var(--space-5); }
 .form-footer small { color: var(--text-dim); font-size: var(--fs-xs); flex: 1 1 220px; }
 .form-status {
